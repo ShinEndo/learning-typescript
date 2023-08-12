@@ -91,3 +91,18 @@ mathematician?.length;
 
 mathematician = "Mark Goldberg";
 mathematician.length;
+
+// 3.5　型エイリアス
+// *************************************************
+type RawData = boolean | number | string | null | undefined;
+let rawDataFirst: RawData;
+let RawDataSecond: RawData;
+let RawDataThird: RawData;
+
+type SomeType = string | undefined;
+// console.log(SomeType); <- エラーになる
+
+// 3.5.2　型エイリアスを組み合わせる
+// *************************************************
+type Id = number | string;
+type IdMaybe = Id | undefined | null:
