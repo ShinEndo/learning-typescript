@@ -77,4 +77,32 @@ var ok = {
 var hasRequired = {
     author: undefined,
 };
-var missingRequired = {};
+//const missingRequired: Writers = {}; <- エラーになる
+// 4.3　オブジェクト型の合併
+// *************************************************
+// 4.3.1　オブジェクト型の合併型の型推論
+// *************************************************
+var poem4 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7 } : { name: "Her Kind", rhymes: true };
+poem4.name;
+poem4.pages;
+poem4.rhymes;
+var poem5 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7 } : { name: "Her Kind", rhymes: true };
+poem5.name;
+// poem5.pages; <- エラーになる
+// poem5.rhymes; <- エラーになる
+// 4.3.3　オブジェクト型の絞り込み
+// *************************************************
+if ("pages" in poem5) {
+    poem5.pages;
+}
+else {
+    poem5.rhymes;
+}
+var poem6 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7, type: 'pages' } : { name: "Her Kind", rhymes: true, type: 'rhymes' };
+poem6.name;
+if (poem6.type === "pages") {
+    console.log("It's got pages: ".concat(poem6.pages));
+}
+else {
+    console.log("It rhymes: ".concat(poem6.rhymes));
+}

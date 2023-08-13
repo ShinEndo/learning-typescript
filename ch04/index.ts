@@ -207,4 +207,65 @@ const hasRequired: Writers = {
     author: undefined,
 };
 
-const missingRequired: Writers = {};
+//const missingRequired: Writers = {}; <- エラーになる
+
+// 4.3　オブジェクト型の合併
+// *************************************************
+// 4.3.1　オブジェクト型の合併型の型推論
+// *************************************************
+const poem4 = Math.random() > 0.5 ? {name: "The Double Image", pages: 7 } : {name: "Her Kind", rhymes: true};
+poem4.name;
+poem4.pages;
+poem4.rhymes;
+
+// 4.3.2　オブジェクト型の合併型の明示的型付け
+// *************************************************
+type PoemWithPages = {
+    name: string;
+    pages: number;
+};
+
+type PoemWithRhymes = {
+    name: string;
+    rhymes: boolean;
+};
+
+type Poem5 = PoemWithPages | PoemWithRhymes;
+
+const poem5: Poem5 = Math.random() > 0.5 ? {name: "The Double Image", pages: 7 } : {name: "Her Kind", rhymes: true};
+poem5.name;
+// poem5.pages; <- エラーになる
+// poem5.rhymes; <- エラーになる
+
+// 4.3.3　オブジェクト型の絞り込み
+// *************************************************
+if("pages" in poem5) {
+    poem5.pages;
+} else {
+    poem5.rhymes;
+}
+
+// 4.3.4　タグ付き合併型
+// *************************************************
+type PoemWithPages6 = {
+    name: string;
+    pages: number;
+    type: 'pages';
+};
+
+type PoemWithRhymes6 = {
+    name: string;
+    rhymes: boolean;
+    type: 'rhymes';
+};
+
+type Poem6 = PoemWithPages6 | PoemWithRhymes6;
+
+const poem6: Poem6 = Math.random() > 0.5 ? {name: "The Double Image", pages: 7, type: 'pages'} : {name: "Her Kind", rhymes: true, type: 'rhymes'};
+poem6.name;
+
+if(poem6.type === "pages") {
+    console.log(`It's got pages: ${poem6.pages}`);
+} else {
+    console.log(`It rhymes: ${poem6.rhymes}`);
+}
