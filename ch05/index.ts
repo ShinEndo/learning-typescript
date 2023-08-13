@@ -99,6 +99,66 @@ function getSongRecordingDate(song:string) : Date | undefined {
     }
 }
 
+// 5.3　関数の型
+// *************************************************
+let nothingInGivesString: () => string;
+
+let inputAndOutput: (songs: string[], count?: number) => number;
+
+const songs = ["Juice", "Shake It Off", "What's Up"];
+
+function runOnSongs(getSongAt2: (index:number) => string){
+    for(let i = 0; i < songs.length; i += 1) {
+        console.log(getSongAt2(i));
+    }
+}
+function getSongAt2(index:number){
+    return `${songs[index]}`
+}
+
+runOnSongs(getSongAt2);
+
+function logSong(song: string) {
+    return `${song}`;
+}
+
+// runOnSongs(logSong); <- エラーになる
+
+// 5.3.1　関数の型と括弧
+// *************************************************
+let returnsStringOrUndefined: () => string | undefined;
+let maybeReturnString: (()=>string) | undefined;
+
+// 5.3.2　パラメーターの型推論
+// *************************************************
+let singer: (song: string) => string;
+
+singer = function(song) {
+    return `Singing: ${song.toUpperCase()}`;
+};
+
+const songs2 = ["Juice", "Shake It Off", "What's Up"];
+songs2.forEach((song,index) => {
+    console.log(`${song} is at index ${index}`);
+});
+
+// 5.3.3　関数型エイリアス
+// *************************************************
+type StringToNumber = (input: string) => number;
+let stringToNumber: StringToNumber;
+
+stringToNumber = (input) => input.length;
+
+// stringToNumber = (input) => input.toUpperCase(); <- エラーになる
+
+type NumberToString = (input:number) => string;
+function usesNumberToString(numberToString: NumberToString){
+    console.log(`The string is: ${numberToString(1234)}`);
+}
+usesNumberToString(input => `${input}! Hooray`);
+// usesNumberToString(input => input * 2); <- エラーになる
+
+
 
 
 

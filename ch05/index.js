@@ -97,3 +97,42 @@ function getSongRecordingDate(song) {
             return undefined;
     }
 }
+// 5.3　関数の型
+// *************************************************
+var nothingInGivesString;
+var inputAndOutput;
+var songs = ["Juice", "Shake It Off", "What's Up"];
+function runOnSongs(getSongAt2) {
+    for (var i = 0; i < songs.length; i += 1) {
+        console.log(getSongAt2(i));
+    }
+}
+function getSongAt2(index) {
+    return "".concat(songs[index]);
+}
+runOnSongs(getSongAt2);
+function logSong(song) {
+    return "".concat(song);
+}
+// runOnSongs(logSong); <- エラーになる
+// 5.3.1　関数の型と括弧
+// *************************************************
+var returnsStringOrUndefined;
+var maybeReturnString;
+// 5.3.2　パラメーターの型推論
+// *************************************************
+var singer;
+singer = function (song) {
+    return "Singing: ".concat(song.toUpperCase());
+};
+var songs2 = ["Juice", "Shake It Off", "What's Up"];
+songs2.forEach(function (song, index) {
+    console.log("".concat(song, " is at index ").concat(index));
+});
+var stringToNumber;
+stringToNumber = function (input) { return input.length; };
+function usesNumberToString(numberToString) {
+    console.log("The string is: ".concat(numberToString(1234)));
+}
+usesNumberToString(function (input) { return "".concat(input, "! Hooray"); });
+// usesNumberToString(input => input * 2); <- エラーになる
