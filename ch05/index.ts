@@ -217,6 +217,16 @@ createDate(1);
 createDate(1,1,2000);
 // createDate(1,1); <- エラーになる
 
+// 5.5.1　呼び出しシグネチャの互換性
+// *************************************************
+function format(data: string): string;
+function format(data:string, needle:string,haystack:string): string;
+// function format(getData: () => string): string; <- エラーになる
+function format(data: string,needle?:string,haystack?:string) {
+    return needle && haystack ? data.replace(needle,haystack) : data;
+}
+
+
 
 
 

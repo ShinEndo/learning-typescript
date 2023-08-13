@@ -178,4 +178,7 @@ function createDate(monthOrTimestamp, day, year) {
 }
 createDate(1);
 createDate(1, 1, 2000);
-// createDate(1,1); <- エラーになる
+// function format(getData: () => string): string; <- エラーになる
+function format(data, needle, haystack) {
+    return needle && haystack ? data.replace(needle, haystack) : data;
+}
