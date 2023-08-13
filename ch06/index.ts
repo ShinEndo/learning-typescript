@@ -69,3 +69,27 @@ console.log(chomiryo.at(0));
 
 console.log(chomiryo[chomiryo.length -1]);
 console.log(chomiryo.at(-1));
+
+// 6.3　スプレッド演算子とレストパラメーター　
+// *************************************************
+// 6.3.1　スプレッド演算子
+// *************************************************
+const soldiers = ["Harriet Tubman", "Joan of Arc", "Khutulun"];
+const soldiersAge = [90,19,45];
+const conjoined = [...soldiers,...soldiersAge];
+
+// 6.3.2　レストパラメーターへの展開
+// *************************************************
+function logWorriors(greeting: string, ...names:string[]){
+    for(const name of names) {
+        console.log(`${greeting},${name}`);
+    }
+}
+
+const warriors2 = ["Cathay Williams","Lozen", "Nzinga"];
+
+logWorriors("Hello",...warriors2);
+
+const birthYears = [1844,1840,1583];
+
+logWorriors("Born in", ...birthYears);
