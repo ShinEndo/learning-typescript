@@ -63,3 +63,37 @@ function singAllTheSongs(singer) {
 singAllTheSongs("Alicia Keys");
 singAllTheSongs("Lady Gaga", "Bad Romance", "Just Dance", "Poker Face");
 // singAllTheSongs("Ella Fitzgerald", 2000); <- エラーになる
+// 5.2　戻り値の型
+// *************************************************
+function singSongs(songs) {
+    for (var _i = 0, songs_2 = songs; _i < songs_2.length; _i++) {
+        var song = songs_2[_i];
+        console.log("".concat(song));
+    }
+    return songs.length;
+}
+;
+function getSongAt(songs, index) {
+    return index < songs.length ? songs[index] : undefined;
+}
+;
+// 5.2.1　明示的な戻り値の型
+// *************************************************
+function singSongRecursive(songs, count) {
+    if (count === void 0) { count = 0; }
+    return songs.length ? singSongRecursive(songs.slice(1), count + 1) : count;
+}
+var singSongRecursive2 = function (songs, count) {
+    if (count === void 0) { count = 0; }
+    return songs.length ? singSongRecursive2(songs.slice(1), count + 1) : count;
+};
+function getSongRecordingDate(song) {
+    switch (song) {
+        case "Strange Fruit":
+            return new Date("April 20, 1939");
+        // case "Greensleeves":
+        //     return "unknown"; <- エラーになる
+        default:
+            return undefined;
+    }
+}
