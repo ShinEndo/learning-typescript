@@ -206,6 +206,17 @@ function workWithUnsafeParam(param: unknown){
     param.toUpperCase();
 }
 
+// 5.5　関数のオーバーロード
+// *************************************************
+function createDate(timestamp:number):Date;
+function createDate(month:number,day:number,yaer:number):Date;
+function createDate(monthOrTimestamp: number, day?:number,year?:number) {
+    return day === undefined || year === undefined ? new Date(monthOrTimestamp) : new Date(year,monthOrTimestamp,day);
+}
+createDate(1);
+createDate(1,1,2000);
+// createDate(1,1); <- エラーになる
+
 
 
 

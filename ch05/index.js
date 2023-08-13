@@ -173,3 +173,9 @@ function workWithUnsafeParam(param) {
     }
     param.toUpperCase();
 }
+function createDate(monthOrTimestamp, day, year) {
+    return day === undefined || year === undefined ? new Date(monthOrTimestamp) : new Date(year, monthOrTimestamp, day);
+}
+createDate(1);
+createDate(1, 1, 2000);
+// createDate(1,1); <- エラーになる
