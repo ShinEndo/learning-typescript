@@ -136,3 +136,40 @@ function usesNumberToString(numberToString) {
 }
 usesNumberToString(function (input) { return "".concat(input, "! Hooray"); });
 // usesNumberToString(input => input * 2); <- エラーになる
+// 5.4　その他の戻り値の型
+// *************************************************
+// 5.4.1　void
+// *************************************************
+function logSong2(song) {
+    if (!song)
+        return;
+    console.log("".concat(song));
+    // return true; <- エラーになる
+}
+var songLogger;
+songLogger = function (song) {
+    console.log("".concat(song));
+};
+songLogger("Heart of Glass");
+function returnsVoid() {
+    return;
+}
+var lazyValue;
+// lazyValue = returnsVoid(); <- エラーになる
+var records = [];
+function saveRecords(newRecords) {
+    newRecords.forEach(function (record) { return records.push(record); });
+    console.log(records);
+}
+saveRecords(['21', 'Come On Over', 'The Bodyguard']);
+// 5.4.2　never
+// *************************************************
+function fail(message) {
+    throw new Error("Invariant failure: ".concat(message, "."));
+}
+function workWithUnsafeParam(param) {
+    if (typeof param !== "string") {
+        fail("param should be a string, not ".concat(typeof param));
+    }
+    param.toUpperCase();
+}

@@ -158,6 +158,53 @@ function usesNumberToString(numberToString: NumberToString){
 usesNumberToString(input => `${input}! Hooray`);
 // usesNumberToString(input => input * 2); <- エラーになる
 
+// 5.4　その他の戻り値の型
+// *************************************************
+// 5.4.1　void
+// *************************************************
+function logSong2(song: string | undefined):void{
+    if(!song) return;
+    console.log(`${song}`);
+
+    // return true; <- エラーになる
+}
+
+let songLogger: (song:string) => void;
+
+songLogger = (song) => {
+    console.log(`${song}`);
+};
+songLogger("Heart of Glass");
+
+function returnsVoid() {
+    return;
+}
+
+let lazyValue: string | undefined;
+
+// lazyValue = returnsVoid(); <- エラーになる
+
+const records: string[] = [];
+
+function saveRecords(newRecords: string[]) {
+    newRecords.forEach(record => records.push(record));
+    console.log(records);
+}
+
+saveRecords(['21', 'Come On Over','The Bodyguard']);
+
+// 5.4.2　never
+// *************************************************
+function fail(message: string): never {
+    throw new Error(`Invariant failure: ${message}.`);
+}
+
+function workWithUnsafeParam(param: unknown){
+    if(typeof param !== "string") {
+        fail(`param should be a string, not ${typeof param}`);
+    }
+    param.toUpperCase();
+}
 
 
 
