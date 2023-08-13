@@ -269,3 +269,54 @@ if(poem6.type === "pages") {
 } else {
     console.log(`It rhymes: ${poem6.rhymes}`);
 }
+
+// 4.4　交差型
+// *************************************************
+type Artwork = {
+    genre: string;
+    name: string;
+};
+
+type Writing = {
+    pages: number;
+    name: string;
+};
+
+type WrittenArt = Artwork & Writing;
+
+type ShortPoem = {author: string} & (
+    {kigo: string; type:"haiku"} | {meter: number; type: "villanelle"}
+);
+
+const morningGlory: ShortPoem = {
+    author: "Fukuda Chiyo-ni",
+    kigo: "Morning Glory",
+    type: "haiku",
+};
+
+// const oneArt: ShortPoem = {
+//     author: "Elizabeth Bishop",
+//     type: "villanelle",
+// } <- エラーになる
+
+// 4.4.1　交差型の危険性
+// *************************************************
+// 4.4.1.1　長い割り当て可能性エラーのメッセージ
+// *************************************************
+type ShortPoemBase = {author: string};
+type Haiku = ShortPoemBase & {kigo: string; type: "haiku"};
+type Villanelle = ShortPoemBase & {meter: number; type: "villanelle"};
+type ShortPoem2 = Haiku | Villanelle;
+
+// const oneArt2: ShortPoem2 = {
+//     author: "Elizabeth Bishop",
+//     type: "villanelle",
+// } <- エラーになる
+
+// 4.4.1.2　never
+// *************************************************
+type NotPossible = string & number;
+
+// const notNumber: NotPossible = 0; <- エラーになる
+
+// const notString: NotPossible = ''; <- エラーになる

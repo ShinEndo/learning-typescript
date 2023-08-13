@@ -106,3 +106,10 @@ if (poem6.type === "pages") {
 else {
     console.log("It rhymes: ".concat(poem6.rhymes));
 }
+var morningGlory = {
+    author: "Fukuda Chiyo-ni",
+    kigo: "Morning Glory",
+    type: "haiku",
+};
+// const notNumber: NotPossible = 0; <- エラーになる
+// const notString: NotPossible = ''; <- エラーになる
