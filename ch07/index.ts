@@ -284,3 +284,33 @@ function useGiveBoth(instance: GivesBothAndEither) {
     instance.giveNumber();
     instance.giveString();
 }
+
+// 7.4　インターフェースのマージ
+// *************************************************
+interface Merged {
+    fromFirst: string;
+}
+
+interface Merged {
+    fromSecond: number;
+}
+
+// 7.4.1　メンバー名の競合
+// *************************************************
+interface MergedProperties {
+    same: (input:boolean) => string;
+    difference: (input:string) => string;
+}
+
+interface MergedProperties {
+    same: (input:boolean) => string;
+    // difference: (inout:number) => string; <- エラーになる
+}
+
+interface MergedMethods {
+    different(input: string): string;
+}
+
+interface MergedMethods {
+    different(input: number): string;
+}
