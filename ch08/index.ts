@@ -20,3 +20,20 @@ new Greeted("take chances, make mistakes, get messy");
 
 // new Greeted(); <- エラーになる
 
+// 8.2　クラスのプロパティ
+// *************************************************
+class FieldTrip {
+    destination: string;
+
+    constructor(destination: string) {
+        this.destination = destination;
+        console.log(`We're going to ${this.destination}`);
+
+        // this.nonexistent = destination; <- エラーになる
+    }
+}
+
+const trip = new FieldTrip("planetarium");
+trip.destination;
+// trip.noneexistent; <- エラーになる
+
