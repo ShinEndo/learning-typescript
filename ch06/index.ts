@@ -92,4 +92,92 @@ logWorriors("Hello",...warriors2);
 
 const birthYears = [1844,1840,1583];
 
-logWorriors("Born in", ...birthYears);
+// logWorriors("Born in", ...birthYears); <- エラーになる
+
+// 6.4　タプル
+// *************************************************
+let yearAndWarrior: [number,string];
+
+yearAndWarrior = [530,"Tomyris"];
+
+// yearAndWarrior = [false,"Tomyris"]; <- エラーになる
+// yearAndWarrior = [530]; <- エラーになる
+
+const [year,warrior] = Math.random() > 0.5 ? [340,"Archidamia"] : [1828,"Rani of Jhansi"];
+
+// 6.4.1　タプルの割り当て可能性
+// *************************************************
+const pariLoose = [false,123];
+// const pariTupleLoose: [boolean,number] = pariLoose; <- エラーになる
+
+const tupleThree: [boolean,number,string] = [false,1583,"Nzinga"];
+const tupleTwoExtra:[boolean,number] = [tupleThree[0],tupleThree[1]];
+// const tupleTwoExtra2:[boolean,number] = tupleThree; <- エラーになる
+
+// 6.4.1.1　スプレッド引数としてのタプル
+// *************************************************
+function logPair(name:string,value:number){
+    console.log(`${name} has ${value}`);
+}
+
+const pairArray = ["Amage",1];
+// logPair(...pairArray); <- エラーになる
+
+const pairTupleIncorrect: [number,string] = [1,"Amage"];
+// logPair(...pairTupleIncorrect); <- エラーになる
+
+const pairTupleCorrect: [string,number] = ["Amage",1];
+logPair(...pairTupleCorrect);
+
+function logTorio(name:string,value:[number,boolean]){
+    console.log(`${name} has ${value[0]} ${value[1]}`)
+}
+
+const torios: [string,[number,boolean]][] = [
+    ["Amanitore",[1,true]],
+    ["Dummy",[2,false]],
+    ["Ann E. Dunwoody",[3,false]]
+];
+
+torios.forEach(trio => logTorio(...trio));
+
+// torios.forEach(logTorio); <- エラーになる
+
+
+// 6.4.2　タプルの型推論
+// *************************************************
+function firstChartAndSize(input:string){
+    return [input[0],input.length];
+}
+
+const [firstChar, size] = firstChartAndSize("Gudit");
+console.log(firstChar);
+console.log(size);
+
+
+// 6.4.2.1　明示的なタプル型
+// *************************************************
+function firstCharAndSizeExplicit(input:string):[string,number]{
+    return [input[0],input.length];
+}
+
+const [firstChar2,size2] = firstCharAndSizeExplicit("Cathay Williams");
+
+// 6.4.2.2　constアサーションが指定されたタプル
+// *************************************************
+const unionArray = [1157,"Tomoe"];
+const readonlyTuple = [1157,"Tomoe"] as const;
+
+const pairMutable: [number,string] = [1157,"Tomoe"];
+pairMutable[0] = 1247;
+console.log(pairMutable[0]);
+
+// const pairAlsoMutable:[number,string] = [1157,"Tomoe"] as const; <- エラーになる
+
+const pairConst = [1157,"Tomoe"] as const;
+// pairConst[0] = 1247; <- エラーになる
+
+function firstCharAndSizeConst(input:string){
+    return [input[0],input.length] as const;
+}
+const [firstChar3,size3] = firstCharAndSizeConst("Ching Shih");
