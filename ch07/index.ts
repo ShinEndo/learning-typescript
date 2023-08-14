@@ -225,3 +225,62 @@ myNovel = {
 //         place: 'West Yorkshire',
 //     },
 // }; <- エラーになる
+
+// 7.3　インターフェースの拡張
+// *************************************************
+interface Writing7 {
+    title: string;
+};
+
+interface Novella extends Writing7 {
+    pages: number;
+}
+
+let myNobella: Novella = {
+    title: 'Ethan Frome',
+    pages: 195,
+};
+
+// let missingPages: Novella = {
+//     title: 'The Awakening',
+// }; <- エラーになる
+
+// let extraProperty: Novella = {
+//     title: 'Naturalism',
+//     pages: 300,
+//     strategy: 'baseline',
+// } <- エラーになる
+
+// 7.3.1　オーバーライドされたプロパティ
+// *************************************************
+interface WithNullableName {
+    name: string | null;
+}
+
+interface WithNonNullableName extends WithNullableName {
+    name: string;
+}
+
+// interface WithNumericName extends WithNullableName {
+//     name: number | string;
+// } <- エラーになる
+
+// 7.3.2　複数インターフェースの拡張
+// *************************************************
+interface GivesNumber {
+    giveNumber(): number;
+}
+
+interface GivesString {
+    giveString(): string;
+}
+
+interface GivesBothAndEither extends GivesNumber,GivesString {
+    giveEither(): number | string;
+}
+
+function useGiveBoth(instance: GivesBothAndEither) {
+    instance.giveEither();
+    instance.giveNumber();
+    instance.giveString();
+}

@@ -69,11 +69,13 @@ myNovel = {
         year: 1812,
     }
 };
-// myNovel = {
-//     author: {
-//         name: 'Emily Bronte',
-//     },
-//     setting: {
-//         place: 'West Yorkshire',
-//     },
-// }; <- エラーになる
+;
+var myNobella = {
+    title: 'Ethan Frome',
+    pages: 195,
+};
+function useGiveBoth(instance) {
+    instance.giveEither();
+    instance.giveNumber();
+    instance.giveString();
+}
