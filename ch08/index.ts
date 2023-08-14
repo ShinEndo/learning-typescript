@@ -37,3 +37,25 @@ const trip = new FieldTrip("planetarium");
 trip.destination;
 // trip.noneexistent; <- エラーになる
 
+// 8.2.1　関数プロパティ
+// *************************************************
+class WithMethod {
+    myMethod(){}
+}
+console.log("□ クラスメソッドの比較 ---------------------");
+console.log(new WithMethod().myMethod === new WithMethod().myMethod);
+
+class WithProperty {
+    myProperty = () => {};
+
+}
+console.log("□ クラスプロパティの比較 ---------------------");
+console.log(new WithProperty().myProperty === new WithProperty().myProperty);
+
+class WithPropertyParameters {
+    takesParameters = (input:boolean) => input ? "Yes" : "No";
+}
+
+const instance = new WithPropertyParameters();
+instance.takesParameters(true);
+// instance.takesParameters(123); <- エラーになる

@@ -31,3 +31,30 @@ var FieldTrip = /** @class */ (function () {
 var trip = new FieldTrip("planetarium");
 trip.destination;
 // trip.noneexistent; <- エラーになる
+// 8.2.1　関数プロパティ
+// *************************************************
+var WithMethod = /** @class */ (function () {
+    function WithMethod() {
+    }
+    WithMethod.prototype.myMethod = function () { };
+    return WithMethod;
+}());
+console.log("□ クラスメソッドの比較 ---------------------");
+console.log(new WithMethod().myMethod === new WithMethod().myMethod);
+var WithProperty = /** @class */ (function () {
+    function WithProperty() {
+        this.myProperty = function () { };
+    }
+    return WithProperty;
+}());
+console.log("□ クラスプロパティの比較 ---------------------");
+console.log(new WithProperty().myProperty === new WithProperty().myProperty);
+var WithPropertyParameters = /** @class */ (function () {
+    function WithPropertyParameters() {
+        this.takesParameters = function (input) { return input ? "Yes" : "No"; };
+    }
+    return WithPropertyParameters;
+}());
+var instance = new WithPropertyParameters();
+instance.takesParameters(true);
+// instance.takesParameters(123); <- エラーになる
