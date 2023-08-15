@@ -424,3 +424,47 @@ school = new Preschool("Sunnyside Daycare");
 // abstract classではインスタンス化できない
 // school = new School("somewhere else");
 
+// 8.7　メンバーの可視性
+// *************************************************
+class Base {
+    isPublicImplicit = 0;
+    public isPublicExplicit = 1;
+    protected isProtected = 2;
+    private isPrivate = 3;
+    #truePrivate = 4;
+}
+
+class Subclass extends Base {
+    examples() {
+        this.isPublicImplicit;
+        this.isPublicExplicit;
+        this.isProtected;
+        // privateの場合、サブクラスからはアクセスできない
+        // this.isPrivate;
+        // private識別子が付与されているので、サブクラスからはアクセスできない
+        // this.#truePrivate;
+    }
+}
+
+new Subclass().isPublicImplicit;
+new Subclass().isPublicExplicit;
+// protectedの場合、インスタンスからはアクセスできない
+// new Subclass().isProtected;
+// privateの場合、インスタンスからはアクセスできない
+// new Subclass().isPrivate;
+
+class TwoKeywords {
+    private readonly name: string;
+
+    constructor() {
+        this.name = "Anne Sullivan";
+    }
+
+    log() {
+        console.log(this.name);
+    }
+}
+
+const two = new TwoKeywords();
+// two.name = "Savitribai Phule";
+

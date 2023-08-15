@@ -23,6 +23,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 var _a;
+var _Base_truePrivate;
 // 8　クラス
 // *************************************************
 var Greeter = /** @class */ (function () {
@@ -402,3 +403,49 @@ var school;
 school = new Preschool("Sunnyside Daycare");
 // abstract classではインスタンス化できない
 // school = new School("somewhere else");
+// 8.7　メンバーの可視性
+// *************************************************
+var Base = /** @class */ (function () {
+    function Base() {
+        this.isPublicImplicit = 0;
+        this.isPublicExplicit = 1;
+        this.isProtected = 2;
+        this.isPrivate = 3;
+        _Base_truePrivate.set(this, 4);
+    }
+    return Base;
+}());
+_Base_truePrivate = new WeakMap();
+var Subclass = /** @class */ (function (_super) {
+    __extends(Subclass, _super);
+    function Subclass() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Subclass.prototype.examples = function () {
+        this.isPublicImplicit;
+        this.isPublicExplicit;
+        this.isProtected;
+        // privateの場合、サブクラスからはアクセスできない
+        // this.isPrivate;
+        // private識別子が付与されているので、サブクラスからはアクセスできない
+        // this.#truePrivate;
+    };
+    return Subclass;
+}(Base));
+new Subclass().isPublicImplicit;
+new Subclass().isPublicExplicit;
+// protectedの場合、インスタンスからはアクセスできない
+// new Subclass().isProtected;
+// privateの場合、インスタンスからはアクセスできない
+// new Subclass().isPrivate;
+var TwoKeywords = /** @class */ (function () {
+    function TwoKeywords() {
+        this.name = "Anne Sullivan";
+    }
+    TwoKeywords.prototype.log = function () {
+        console.log(this.name);
+    };
+    return TwoKeywords;
+}());
+var two = new TwoKeywords();
+// two.name = "Savitribai Phule";
