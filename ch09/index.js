@@ -29,5 +29,54 @@ function greetComedian2(name) {
     }
 }
 greetComedian2('Bea Arthur');
-// TypeScriptで型エラーにならないが、JavaScriptで実行するとクラッシュする
+// TypeScriptで型エラーにならず、JavaScriptでもクラッシュしない（elseでクラッシュを事前に防いでいる）
 greetComedian2({ name: "Bea Arthur" });
+// 9.2 型述語
+// *************************************************
+function isNumberOrString(value) {
+    return ['number', 'string'].includes(typeof value);
+}
+function logValueIfExists(value) {
+    if (isNumberOrString(value)) {
+        // valueの型が絞られていないため、エラーになる
+        // value.toString();
+    }
+    else {
+        console.log("Value does not exist", value);
+    }
+}
+function isNumberOrString2(value) {
+    return ['number', 'string'].includes(typeof value);
+}
+function logValueIfExists2(value) {
+    if (isNumberOrString2(value)) {
+        value.toString();
+    }
+    else {
+        console.log("Value does not exist", value);
+    }
+}
+function isStandupComedian(value) {
+    return 'routine' in value;
+}
+function workWithComedian(value) {
+    if (isStandupComedian(value)) {
+        console.log(value.routine);
+    }
+    // 絞り込みができていないので、エラーになる
+    // console.log(value.routine);
+}
+function isLongString(input) {
+    return !!(input && input.length > 7);
+}
+function workWithText(text) {
+    if (isLongString(text)) {
+        console.log("Long text:", text.length);
+    }
+    else {
+        // 複雑な型述語のため、予期せぬundefined型によるエラーになる
+        // console.log("Short text:", text?.length);
+    }
+}
+workWithText("test test test");
+workWithText("test");
