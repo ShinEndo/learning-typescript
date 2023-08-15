@@ -147,3 +147,15 @@ var invalidData2 = JSON.parse(rawData);
 var invalidData3 = JSON.parse(rawData);
 var invalidData4 = JSON.parse(rawData);
 var invalidData5 = JSON.parse(rawData);
+// 9.4.1　キャッチされるエラーの型アサーション
+// *************************************************
+try {
+}
+catch (error) {
+    console.warn("Oh no!", error.message);
+}
+try {
+}
+catch (error) {
+    console.warn("Oh no!", error instanceof Error ? error.message : error);
+}
