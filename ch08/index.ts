@@ -265,3 +265,42 @@ const teacher2 =  new StudentTeacher();
 teacher2.teach();
 teacher2.learn();
 // teacher2.other(); <- エラーになる
+
+// 8.5.1　クラスの拡張の割り当て可能性
+// *************************************************
+class Lesson {
+    subject: string;
+
+    constructor(subject: string) {
+        this.subject = subject;
+    }
+}
+
+class OnlineLesson extends Lesson {
+    url: string;
+
+    constructor(subject:string,url:string) {
+        super(subject);
+        this.url = url;
+    }
+}
+
+let lesson:Lesson;
+lesson = new Lesson("coding");
+lesson = new OnlineLesson("coding","oreilly.com");
+
+let online: OnlineLesson;
+online = new OnlineLesson("coding","oreilly.com");
+// online = new Lesson("coding"); <- エラーになる
+
+class PastGrandes {
+    grandes: number[] = [];
+}
+
+class LabeledPastGrndes extends PastGrandes {
+    label?: string;
+}
+
+let subClass: LabeledPastGrndes;
+subClass = new LabeledPastGrndes();
+subClass = new PastGrandes();

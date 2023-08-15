@@ -223,3 +223,27 @@ var teacher2 = new StudentTeacher();
 teacher2.teach();
 teacher2.learn();
 // teacher2.other(); <- エラーになる
+// 8.5.1　クラスの拡張の割り当て可能性
+// *************************************************
+var Lesson = /** @class */ (function () {
+    function Lesson(subject) {
+        this.subject = subject;
+    }
+    return Lesson;
+}());
+var OnlineLesson = /** @class */ (function (_super) {
+    __extends(OnlineLesson, _super);
+    function OnlineLesson(subject, url) {
+        var _this = this;
+        _this.subject = subject;
+        _this.url = url;
+        return _this;
+    }
+    return OnlineLesson;
+}(Lesson));
+var lesson;
+lesson = new Lesson("coding");
+lesson = new OnlineLesson("coding", "oreilly.com");
+var online;
+online = new OnlineLesson("coding", "oreilly.com");
+online = new Lesson("coding");
