@@ -143,3 +143,36 @@ const randomQuote = new RandomQuote();
 randomQuote.explicit;
 randomQuote.implicit;
 
+// 8.3　型としてのクラス
+// *************************************************
+class Teacher {
+    sayHello() {
+        console.log("Take chances, make mistakes, get messy!");
+    }
+}
+
+let teacher: Teacher;
+
+teacher = new Teacher();
+
+// teacher = "Wahoo!"; <- エラーになる
+
+class SchoolBus {
+    getAbilities() {
+        return ["magic","shapeshifting"];
+    }
+}
+
+function withSchoolBus(bus: SchoolBus) {
+    console.log(bus.getAbilities());
+}
+
+withSchoolBus(new SchoolBus());
+
+withSchoolBus({
+    getAbilities: () => ["transmogrification"],
+});
+
+// withSchoolBus({
+//     getAbilities: () => 123,
+// }) <- エラーになる

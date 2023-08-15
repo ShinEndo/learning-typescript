@@ -130,3 +130,34 @@ var RandomQuote = /** @class */ (function () {
 var randomQuote = new RandomQuote();
 randomQuote.explicit;
 randomQuote.implicit;
+// 8.3　型としてのクラス
+// *************************************************
+var Teacher = /** @class */ (function () {
+    function Teacher() {
+    }
+    Teacher.prototype.sayHello = function () {
+        console.log("Take chances, make mistakes, get messy!");
+    };
+    return Teacher;
+}());
+var teacher;
+teacher = new Teacher();
+// teacher = "Wahoo!"; <- エラーになる
+var SchoolBus = /** @class */ (function () {
+    function SchoolBus() {
+    }
+    SchoolBus.prototype.getAbilities = function () {
+        return ["magic", "shapeshifting"];
+    };
+    return SchoolBus;
+}());
+function withSchoolBus(bus) {
+    console.log(bus.getAbilities());
+}
+withSchoolBus(new SchoolBus());
+withSchoolBus({
+    getAbilities: function () { return ["transmogrification"]; },
+});
+// withSchoolBus({
+//     getAbilities: () => 123,
+// }) <- エラーになる
