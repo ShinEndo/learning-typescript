@@ -158,6 +158,21 @@ withSchoolBus(new SchoolBus());
 withSchoolBus({
     getAbilities: function () { return ["transmogrification"]; },
 });
-// withSchoolBus({
-//     getAbilities: () => 123,
-// }) <- エラーになる
+var Student = /** @class */ (function () {
+    function Student(name) {
+        this.name = name;
+    }
+    Student.prototype.study = function (hours) {
+        for (var i = 0; i < hours; i += 1) {
+            console.log("...studying...");
+        }
+    };
+    return Student;
+}());
+// class Slacker implements Learner {
+//     name = "Rocky";
+// } <- エラーになる
+// class Student2 implements Learner {
+//     name;
+//     study(hours):  {}
+// } <- エラーになる

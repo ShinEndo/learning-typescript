@@ -176,3 +176,33 @@ withSchoolBus({
 // withSchoolBus({
 //     getAbilities: () => 123,
 // }) <- エラーになる
+
+// 8.4　クラスとインターフェース
+// *************************************************
+interface Learner {
+    name: string;
+    study(hours: number): void;
+}
+
+class Student implements Learner {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    study(hours: number): void {
+        for(let i = 0; i < hours; i+=1) {
+            console.log("...studying...");
+        }
+    }
+}
+
+// class Slacker implements Learner {
+//     name = "Rocky";
+// } <- エラーになる
+
+// class Student2 implements Learner {
+//     name;
+//     study(hours):  {}
+// } <- エラーになる
