@@ -449,3 +449,22 @@ var TwoKeywords = /** @class */ (function () {
 }());
 var two = new TwoKeywords();
 // two.name = "Savitribai Phule";
+// 8.8　静的フィールド修飾子
+// *************************************************
+var Question = /** @class */ (function () {
+    function Question() {
+    }
+    Question.prototype.guess = function (getAnswer) {
+        var answer = getAnswer(Question.prompt);
+        if (answer === Question.answer) {
+            console.log("You got it!");
+        }
+        else {
+            console.log("Try again...");
+        }
+    };
+    Question.answer = "bash";
+    Question.prompt = "What's an ogre's favorite programing language?";
+    return Question;
+}());
+// Question.answer:

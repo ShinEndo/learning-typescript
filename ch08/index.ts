@@ -468,3 +468,21 @@ class TwoKeywords {
 const two = new TwoKeywords();
 // two.name = "Savitribai Phule";
 
+// 8.8　静的フィールド修飾子
+// *************************************************
+class Question {
+    protected static readonly answer = "bash";
+    protected static readonly prompt = "What's an ogre's favorite programing language?";
+
+    guess(getAnswer: (prompt:string) => string){
+        const answer = getAnswer(Question.prompt);
+
+        if(answer === Question.answer) {
+            console.log("You got it!");
+        } else {
+            console.log("Try again...");
+        }
+    }
+}
+
+// Question.answer:
