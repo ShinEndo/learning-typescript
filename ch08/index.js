@@ -321,3 +321,32 @@ var ContinuedGradesTally = /** @class */ (function (_super) {
     }
     return ContinuedGradesTally;
 }(GradesTally));
+// 8.5.3　オーバーライドされたメソッド
+// *************************************************
+var GradeCounter = /** @class */ (function () {
+    function GradeCounter() {
+    }
+    GradeCounter.prototype.countGrades = function (grades, letter) {
+        return grades.filter(function (grade) { return grade === letter; }).length;
+    };
+    return GradeCounter;
+}());
+var FailureCounter = /** @class */ (function (_super) {
+    __extends(FailureCounter, _super);
+    function FailureCounter() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    FailureCounter.prototype.countGrades = function (grades) {
+        return _super.prototype.countGrades.call(this, grades, "F");
+    };
+    return FailureCounter;
+}(GradeCounter));
+// メソッドのオーバーライドに関するエラー例
+// class AnyFailureChecker extends GradeCounter {
+//     countGrades(grades: string[]) {
+//         return super.countGrades(grades,"F") !== 0;
+//     }
+// }
+// const counter: GradeCounter = new AnyFailureChecker();
+// const count = counter.countGrades(["A","C","F"], "D");
+// console.log(count);
