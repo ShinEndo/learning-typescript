@@ -132,3 +132,19 @@ function getRatingKeyof(ratings: Ratings, key: keyof Ratings):number{
 const ratings3: Ratings = {audience: 77, critics:84};
 console.log(getRatingKeyof(ratings2, 'audience'));
 // console.log(getRatingKeyof(ratings2, 'not valid')); <- エラーになる
+
+// 9.3.2　typeof
+// *************************************************
+const original = {
+    medium: "movie",
+    title: "Mean Girls",
+};
+
+let adaptation: typeof original;
+
+if(Math.random() > 0.5) {
+    adaptation = {...original,medium: "play"};
+} else {
+    // adaptation = {...original,medium:2};
+}
+
