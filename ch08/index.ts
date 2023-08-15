@@ -304,3 +304,45 @@ class LabeledPastGrndes extends PastGrandes {
 let subClass: LabeledPastGrndes;
 subClass = new LabeledPastGrndes();
 subClass = new PastGrandes();
+
+// 8.5.2　オーバーライドされたコンストラクター
+// *************************************************
+class GradeAnnouncer {
+    message: string;
+
+    constructor(grade: number) {
+        this.message = grade <= 65 ? "Maybe next time ..." : "You pass!";
+    }
+
+}
+
+class PassingAnnouncer extends GradeAnnouncer {
+    constructor(){
+        super(100);
+    }
+}
+
+class FailingAnnouncer extends GradeAnnouncer {
+    // constructor() {} <- エラーになる
+}
+
+class GradesTally {
+    grades: number[] = [];
+
+    addGrades(...grades: number[]){
+        this.grades.push(...grades);
+        return this.grades.length;
+    }
+}
+
+// サブクラスのコンストラクターは、thisやsuperにアクセスする前にベースのコンストラクターを呼ぶ必要がある！
+// ベースのコンストラクターを呼ぶために、super()を使用する！
+class ContinuedGradesTally extends GradesTally {
+    constructor(previousGrades: number[]) {
+        super();
+        this.grades = [...previousGrades];
+        // super();
+        console.log(`Starting with length, ${this.grades.length}`);
+    }
+}
+

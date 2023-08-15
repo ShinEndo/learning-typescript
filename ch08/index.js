@@ -13,6 +13,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var _a;
 // 8　クラス
 // *************************************************
@@ -234,8 +243,7 @@ var Lesson = /** @class */ (function () {
 var OnlineLesson = /** @class */ (function (_super) {
     __extends(OnlineLesson, _super);
     function OnlineLesson(subject, url) {
-        var _this = this;
-        _this.subject = subject;
+        var _this = _super.call(this, subject) || this;
         _this.url = url;
         return _this;
     }
@@ -246,4 +254,70 @@ lesson = new Lesson("coding");
 lesson = new OnlineLesson("coding", "oreilly.com");
 var online;
 online = new OnlineLesson("coding", "oreilly.com");
-online = new Lesson("coding");
+// online = new Lesson("coding"); <- エラーになる
+var PastGrandes = /** @class */ (function () {
+    function PastGrandes() {
+        this.grandes = [];
+    }
+    return PastGrandes;
+}());
+var LabeledPastGrndes = /** @class */ (function (_super) {
+    __extends(LabeledPastGrndes, _super);
+    function LabeledPastGrndes() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return LabeledPastGrndes;
+}(PastGrandes));
+var subClass;
+subClass = new LabeledPastGrndes();
+subClass = new PastGrandes();
+// 8.5.2　オーバーライドされたコンストラクター
+// *************************************************
+var GradeAnnouncer = /** @class */ (function () {
+    function GradeAnnouncer(grade) {
+        this.message = grade <= 65 ? "Maybe next time ..." : "You pass!";
+    }
+    return GradeAnnouncer;
+}());
+var PassingAnnouncer = /** @class */ (function (_super) {
+    __extends(PassingAnnouncer, _super);
+    function PassingAnnouncer() {
+        return _super.call(this, 100) || this;
+    }
+    return PassingAnnouncer;
+}(GradeAnnouncer));
+var FailingAnnouncer = /** @class */ (function (_super) {
+    __extends(FailingAnnouncer, _super);
+    function FailingAnnouncer() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return FailingAnnouncer;
+}(GradeAnnouncer));
+var GradesTally = /** @class */ (function () {
+    function GradesTally() {
+        this.grades = [];
+    }
+    GradesTally.prototype.addGrades = function () {
+        var _a;
+        var grades = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            grades[_i] = arguments[_i];
+        }
+        (_a = this.grades).push.apply(_a, grades);
+        return this.grades.length;
+    };
+    return GradesTally;
+}());
+// サブクラスのコンストラクターは、thisやsuperにアクセスする前にベースのコンストラクターを呼ぶ必要がある！
+// ベースのコンストラクターを呼ぶために、super()を使用する！
+var ContinuedGradesTally = /** @class */ (function (_super) {
+    __extends(ContinuedGradesTally, _super);
+    function ContinuedGradesTally(previousGrades) {
+        var _this = _super.call(this) || this;
+        _this.grades = __spreadArray([], previousGrades, true);
+        // super();
+        console.log("Starting with length, ".concat(_this.grades.length));
+        return _this;
+    }
+    return ContinuedGradesTally;
+}(GradesTally));
