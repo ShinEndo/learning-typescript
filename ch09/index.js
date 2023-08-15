@@ -190,3 +190,42 @@ var asserted = {
 // プリミティブ型からプリミティブ型には変更できない
 // let myValue = "Stella!" as number;
 var myValueDouble = "1337";
+// 9.5　constアサーション
+// *************************************************
+var readonlyArray = [0, ''];
+// 9.5.1　リテラルとプリミティブ型
+// *************************************************
+var getName = function () { return "Maria Bamford"; };
+var getNameConst = function () { return "Maria Bamford"; };
+function tellJoke(joke) {
+    if (joke.style === "one-liner") {
+        console.log(joke.quote);
+    }
+    else {
+        console.log(joke.quote.split("\n"));
+    }
+}
+var narrowJoke = {
+    quote: "If you stay alive for no other reason do it for spite.",
+    style: "one-liner"
+};
+tellJoke(narrowJoke);
+var wideJoke = {
+    quote: "Time files when you are anxious",
+    style: "one-liner"
+};
+// "one-liner"がstring型のため、エラーになる
+// tellJoke(wideJoke);
+// MEMO 
+// ---------------------------------------------------
+var literalData = "literal string";
+// ※ constで文字列を宣言したとき、型推論でリテラル型になるが、
+var object = {
+    string: "invalid literal string",
+    literalString: "literal string",
+    number: 0,
+};
+//   constでオブジェクトを宣言した場合の文字列はリテラル型にならない（string型になる）
+// ※ constで宣言したオブジェクトのプロパティをリテラル型にしたい場合、
+//   「as const」で明示的に宣言する必要がある 
+// ---------------------------------------------------
