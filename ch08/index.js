@@ -350,3 +350,31 @@ var FailureCounter = /** @class */ (function (_super) {
 // const counter: GradeCounter = new AnyFailureChecker();
 // const count = counter.countGrades(["A","C","F"], "D");
 // console.log(count);
+// 8.5.4　オーバーライドされたプロパティ
+// *************************************************
+var Assingment = /** @class */ (function () {
+    function Assingment() {
+    }
+    return Assingment;
+}());
+var GradedAssingment = /** @class */ (function (_super) {
+    __extends(GradedAssingment, _super);
+    function GradedAssingment(grade) {
+        var _this = _super.call(this) || this;
+        _this.grade = grade;
+        return _this;
+    }
+    return GradedAssingment;
+}(Assingment));
+var NumericGrade = /** @class */ (function () {
+    function NumericGrade() {
+        this.value = 0;
+    }
+    return NumericGrade;
+}());
+// プロパティのオーバーライドに関するエラー例
+// class VagueGrade extends NumericGrade {
+//     value = Math.random() > 0.5 ? 1 : "...";
+// }
+// const instance:NumericGrade = new VagueGrade();
+// console.log(instance.value);

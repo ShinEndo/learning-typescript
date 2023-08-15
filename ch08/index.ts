@@ -371,4 +371,29 @@ class FailureCounter extends GradeCounter {
 // const count = counter.countGrades(["A","C","F"], "D");
 // console.log(count);
 
+// 8.5.4　オーバーライドされたプロパティ
+// *************************************************
+class Assingment {
+    grade?: number;
+}
+
+class GradedAssingment extends Assingment {
+    grade: number;
+
+    constructor(grade:number) {
+        super();
+        this.grade = grade;
+    }
+}
+
+class NumericGrade {
+    value = 0;
+}
+
+// プロパティのオーバーライドに関するエラー例
+// class VagueGrade extends NumericGrade {
+//     value = Math.random() > 0.5 ? 1 : "...";
+// }
+// const instance:NumericGrade = new VagueGrade();
+// console.log(instance.value);
 
