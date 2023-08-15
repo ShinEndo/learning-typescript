@@ -100,3 +100,13 @@ class ActivitiesQueue {
 const activities = new ActivitiesQueue();
 activities.initialize(['eat','sleep','learn']);
 activities.next();
+
+// 8.2.3　オプションプロパティ
+// *************************************************
+class MissingInitializer2 {
+    property?: string;
+}
+
+new MissingInitializer2().property?.length;
+// new MissingInitializer2().property.length; <- エラーになる
+

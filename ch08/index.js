@@ -1,3 +1,4 @@
+var _a;
 // 8　クラス
 // *************************************************
 var Greeter = /** @class */ (function () {
@@ -93,3 +94,12 @@ var ActivitiesQueue = /** @class */ (function () {
 var activities = new ActivitiesQueue();
 activities.initialize(['eat', 'sleep', 'learn']);
 activities.next();
+// 8.2.3　オプションプロパティ
+// *************************************************
+var MissingInitializer2 = /** @class */ (function () {
+    function MissingInitializer2() {
+    }
+    return MissingInitializer2;
+}());
+(_a = new MissingInitializer2().property) === null || _a === void 0 ? void 0 : _a.length;
+// new MissingInitializer2().property.length; <- エラーになる
