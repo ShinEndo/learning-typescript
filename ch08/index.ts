@@ -397,3 +397,30 @@ class NumericGrade {
 // const instance:NumericGrade = new VagueGrade();
 // console.log(instance.value);
 
+// 8.6　抽象クラス
+// *************************************************
+abstract class School {
+    readonly name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    abstract getStudentTypes(): string[];
+}
+
+class Preschool extends School {
+    getStudentTypes(){
+        return ["preschooler"];
+    }
+}
+
+// abstract メソッドを再定義しないとエラーになる
+// class Absence extends School{}
+
+let school: School;
+
+school = new Preschool("Sunnyside Daycare");
+// abstract classではインスタンス化できない
+// school = new School("somewhere else");
+

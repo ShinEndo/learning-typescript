@@ -378,3 +378,27 @@ var NumericGrade = /** @class */ (function () {
 // }
 // const instance:NumericGrade = new VagueGrade();
 // console.log(instance.value);
+// 8.6　抽象クラス
+// *************************************************
+var School = /** @class */ (function () {
+    function School(name) {
+        this.name = name;
+    }
+    return School;
+}());
+var Preschool = /** @class */ (function (_super) {
+    __extends(Preschool, _super);
+    function Preschool() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Preschool.prototype.getStudentTypes = function () {
+        return ["preschooler"];
+    };
+    return Preschool;
+}(School));
+// abstract メソッドを再定義しないとエラーになる
+// class Absence extends School{}
+var school;
+school = new Preschool("Sunnyside Daycare");
+// abstract classではインスタンス化できない
+// school = new School("somewhere else");
