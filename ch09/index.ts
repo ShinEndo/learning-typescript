@@ -161,3 +161,20 @@ function logRating(key: keyof typeof ratings4) {
 
 logRating('imdb');
 // logRating('invalid');
+
+// 9.4　型アサーション
+// *************************************************
+const rawData = `["grace", "frankie"]`;
+
+const data = JSON.parse(rawData);
+const data2 = JSON.parse(rawData) as string[];
+const data3 = JSON.parse(rawData) as [string,string];
+const data4 = JSON.parse(rawData) as ["grace","frankie"];
+
+
+// ※ 型アサーションを使用すると、全く関係ない型に再定義できてしまう
+const invalidData2 = JSON.parse(rawData) as number[];
+const invalidData3 = JSON.parse(rawData) as [number,string];
+const invalidData4 = JSON.parse(rawData) as ["invalid","invalid"];
+const invalidData5 = JSON.parse(rawData) as ["invalid","invalid","invalid"];
+

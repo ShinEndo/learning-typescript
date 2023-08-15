@@ -135,3 +135,15 @@ function logRating(key) {
 }
 logRating('imdb');
 // logRating('invalid');
+// 9.4　型アサーション
+// *************************************************
+var rawData = "[\"grace\", \"frankie\"]";
+var data = JSON.parse(rawData);
+var data2 = JSON.parse(rawData);
+var data3 = JSON.parse(rawData);
+var data4 = JSON.parse(rawData);
+// ※ 型アサーションを使用すると、全く関係ない型に再定義できてしまう
+var invalidData2 = JSON.parse(rawData);
+var invalidData3 = JSON.parse(rawData);
+var invalidData4 = JSON.parse(rawData);
+var invalidData5 = JSON.parse(rawData);
