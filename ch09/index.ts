@@ -37,7 +37,7 @@ greetComedian2('Bea Arthur');
 // TypeScriptで型エラーにならず、JavaScriptでもクラッシュしない（elseでクラッシュを事前に防いでいる）
 greetComedian2({name: "Bea Arthur"});
 
-// 9.2 型述語
+// 9.2　型述語
 // *************************************************
 function isNumberOrString(value: unknown) {
     return ['number','string'].includes(typeof value);
@@ -98,3 +98,37 @@ function workWithText(text:string | undefined) {
 }
 workWithText("test test test");
 workWithText("test");
+
+// 9.3　型演算子
+// *************************************************
+// 9.3.1　keyof
+// *************************************************
+interface Ratings {
+    audience: number;
+    critics: number;
+}
+
+function getRating(ratings: Ratings, key: string): number{
+    // TypeScriptの設定が厳格な場合、エラーになる
+    return ratings[key];
+}
+
+const ratings: Ratings = {audience: 77, critics:84};
+console.log(getRating(ratings, 'audience'));
+console.log(getRating(ratings, 'not valid')); // コンパイルは通るけど、不正な値
+
+function getRating2(ratings: Ratings, key: 'audience' | 'critics'):number{
+    return ratings[key];
+}
+const ratings2: Ratings = {audience: 77, critics:84};
+console.log(getRating2(ratings2, 'audience'));
+// console.log(getRating2(ratings2, 'not valid')); <- エラーになる
+
+// 「keyof」によって、すべてのキーの合併型が簡潔に表現できる！
+function getRatingKeyof(ratings: Ratings, key: keyof Ratings):number{
+    return ratings[key];
+}
+
+const ratings3: Ratings = {audience: 77, critics:84};
+console.log(getRatingKeyof(ratings2, 'audience'));
+// console.log(getRatingKeyof(ratings2, 'not valid')); <- エラーになる

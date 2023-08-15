@@ -31,7 +31,7 @@ function greetComedian2(name) {
 greetComedian2('Bea Arthur');
 // TypeScriptで型エラーにならず、JavaScriptでもクラッシュしない（elseでクラッシュを事前に防いでいる）
 greetComedian2({ name: "Bea Arthur" });
-// 9.2 型述語
+// 9.2　型述語
 // *************************************************
 function isNumberOrString(value) {
     return ['number', 'string'].includes(typeof value);
@@ -80,3 +80,23 @@ function workWithText(text) {
 }
 workWithText("test test test");
 workWithText("test");
+function getRating(ratings, key) {
+    // TypeScriptの設定が厳格な場合、エラーになる
+    return ratings[key];
+}
+var ratings = { audience: 77, critics: 84 };
+console.log(getRating(ratings, 'audience'));
+console.log(getRating(ratings, 'not valid')); // コンパイルは通るけど、不正な値
+function getRating2(ratings, key) {
+    return ratings[key];
+}
+var ratings2 = { audience: 77, critics: 84 };
+console.log(getRating2(ratings2, 'audience'));
+// console.log(getRating2(ratings2, 'not valid')); <- エラーになる
+// 「keyof」によって、すべてのキーの合併型が簡潔に表現できる！
+function getRatingKeyof(ratings, key) {
+    return ratings[key];
+}
+var ratings3 = { audience: 77, critics: 84 };
+console.log(getRatingKeyof(ratings2, 'audience'));
+// console.log(getRatingKeyof(ratings2, 'not valid')); <- エラーになる
