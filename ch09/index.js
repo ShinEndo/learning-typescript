@@ -171,3 +171,22 @@ var maybeValue = seasonCounts.get("I Love Lucy");
 console.log(maybeValue.toString());
 var knownValue = seasonCounts.get("The Golden Girls");
 console.log(knownValue.toString());
+// 9.4.3　型アサーションの注意事項
+// *************************************************
+var seasonCounts2 = new Map([["I Love Lucy", 6], ["The Golden Girls", 7]]);
+var knownValue2 = seasonCounts.get("Broad City");
+// const declared: Entertainer = {
+//     name: "Moms Mabley",
+// }
+var asserted = {
+    name: "Moms Mabley",
+};
+// TypeScriptではエラーにならないが、JavaScriptでクラッシュする
+// console.log(declared.acts.join(", "));
+// TypeScriptではエラーにならないが、JavaScriptでクラッシュする
+// console.log(asserted.acts.join(", "));
+// 9.4.3.2　型アサーションの割り当て可能性
+// *************************************************
+// プリミティブ型からプリミティブ型には変更できない
+// let myValue = "Stella!" as number;
+var myValueDouble = "1337";

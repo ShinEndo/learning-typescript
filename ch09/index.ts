@@ -210,3 +210,37 @@ console.log(maybeValue!.toString());
 
 const knownValue = seasonCounts.get("The Golden Girls")!;
 console.log(knownValue.toString());
+
+// 9.4.3　型アサーションの注意事項
+// *************************************************
+const seasonCounts2 = new Map([["I Love Lucy", 6],["The Golden Girls", 7]]);
+const knownValue2 = seasonCounts.get("Broad City")!;
+// TypeScriptではエラーにならないが、JavaScriptでクラッシュする
+// console.log(knownValue2.toString());
+
+// 9.4.3.1　型アサーション vs 宣言
+// *************************************************
+interface Entertainer {
+    acts: string[];
+    name: string;
+}
+
+// const declared: Entertainer = {
+//     name: "Moms Mabley",
+// }
+
+const asserted = {
+    name: "Moms Mabley",
+} as Entertainer;
+
+// TypeScriptではエラーにならないが、JavaScriptでクラッシュする
+// console.log(declared.acts.join(", "));
+// TypeScriptではエラーにならないが、JavaScriptでクラッシュする
+// console.log(asserted.acts.join(", "));
+
+// 9.4.3.2　型アサーションの割り当て可能性
+// *************************************************
+// プリミティブ型からプリミティブ型には変更できない
+// let myValue = "Stella!" as number;
+
+let myValueDouble = "1337" as unknown as number;
