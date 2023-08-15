@@ -124,3 +124,14 @@ if (Math.random() > 0.5) {
 else {
     // adaptation = {...original,medium:2};
 }
+// 9.3.2.1　keyof typeof
+// *************************************************
+var ratings4 = {
+    imdb: 8.4,
+    metacritic: 82,
+};
+function logRating(key) {
+    console.log(ratings4[key]);
+}
+logRating('imdb');
+// logRating('invalid');
