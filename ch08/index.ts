@@ -59,3 +59,44 @@ class WithPropertyParameters {
 const instance = new WithPropertyParameters();
 instance.takesParameters(true);
 // instance.takesParameters(123); <- エラーになる
+
+// 8.2.2　初期化チェック
+// *************************************************
+class WithValue {
+    immediate = 0;
+    later: number;
+    mayBeUndefined: number | undefined;
+    // unused: number; <- エラーになる
+
+    constructor() {
+        this.later = 1;
+    }
+}
+
+// 厳格な初期化チェックをしていないので、
+// Typescriptのコンパイルには成功するが、
+// JavaScriptで実行するとクラッシュする
+// -------------------------------------------------
+// class MissingInitializer {
+//     property: string;
+// }
+// new MissingInitializer().property.length;
+// -------------------------------------------------
+
+// 8.2.2.1　明確に割り当てられたプロパティ
+// *************************************************
+class ActivitiesQueue {
+    pending!: string[];
+
+    initialize(pending: string[]) {
+        this.pending = pending;
+    }
+
+    next() {
+        return this.pending.pop();
+    }
+}
+
+const activities = new ActivitiesQueue();
+activities.initialize(['eat','sleep','learn']);
+activities.next();

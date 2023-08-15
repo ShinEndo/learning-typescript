@@ -58,3 +58,38 @@ var WithPropertyParameters = /** @class */ (function () {
 var instance = new WithPropertyParameters();
 instance.takesParameters(true);
 // instance.takesParameters(123); <- エラーになる
+// 8.2.2　初期化チェック
+// *************************************************
+var WithValue = /** @class */ (function () {
+    // unused: number; <- エラーになる
+    function WithValue() {
+        this.immediate = 0;
+        this.later = 1;
+    }
+    return WithValue;
+}());
+// 厳格な初期化チェックをしていないので、
+// Typescriptのコンパイルには成功するが、
+// JavaScriptで実行するとクラッシュする
+// -------------------------------------------------
+// class MissingInitializer {
+//     property: string;
+// }
+// new MissingInitializer().property.length;
+// -------------------------------------------------
+// 8.2.2.1　明確に割り当てられたプロパティ
+// *************************************************
+var ActivitiesQueue = /** @class */ (function () {
+    function ActivitiesQueue() {
+    }
+    ActivitiesQueue.prototype.initialize = function (pending) {
+        this.pending = pending;
+    };
+    ActivitiesQueue.prototype.next = function () {
+        return this.pending.pop();
+    };
+    return ActivitiesQueue;
+}());
+var activities = new ActivitiesQueue();
+activities.initialize(['eat', 'sleep', 'learn']);
+activities.next();
