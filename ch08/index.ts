@@ -110,3 +110,36 @@ class MissingInitializer2 {
 new MissingInitializer2().property?.length;
 // new MissingInitializer2().property.length; <- エラーになる
 
+// 8.2.4　読み取り専用プロパティ
+// *************************************************
+class Quote {
+    readonly text: string;
+
+    constructor(text: string) {
+        this.text = text;
+    }
+
+    emphasize() {
+        // this.text += "!"; <- エラーになる
+    }
+}
+
+const quote = new Quote("There is a brilliant child locked inside every student.");
+// quote.text = "Ha!"; <- エラーになる
+
+class RandomQuote {
+    readonly explicit: string = "Home is the nicest word there is.";
+    readonly implicit = "Home is the nicest word there is.";
+
+    constructor() {
+        if(Math.random() > 0.5) {
+            this.explicit = "We start leaning the minite we're born.";
+            //this.implicit = "We start leaning the minite we're born."; <- エラーになる
+        }
+    }
+}
+
+const randomQuote = new RandomQuote();
+randomQuote.explicit;
+randomQuote.implicit;
+

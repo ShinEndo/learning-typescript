@@ -103,3 +103,30 @@ var MissingInitializer2 = /** @class */ (function () {
 }());
 (_a = new MissingInitializer2().property) === null || _a === void 0 ? void 0 : _a.length;
 // new MissingInitializer2().property.length; <- エラーになる
+// 8.2.4　読み取り専用プロパティ
+// *************************************************
+var Quote = /** @class */ (function () {
+    function Quote(text) {
+        this.text = text;
+    }
+    Quote.prototype.emphasize = function () {
+        // this.text += "!"; <- エラーになる
+    };
+    return Quote;
+}());
+var quote = new Quote("There is a brilliant child locked inside every student.");
+// quote.text = "Ha!"; <- エラーになる
+var RandomQuote = /** @class */ (function () {
+    function RandomQuote() {
+        this.explicit = "Home is the nicest word there is.";
+        this.implicit = "Home is the nicest word there is.";
+        if (Math.random() > 0.5) {
+            this.explicit = "We start leaning the minite we're born.";
+            //this.implicit = "We start leaning the minite we're born."; <- エラーになる
+        }
+    }
+    return RandomQuote;
+}());
+var randomQuote = new RandomQuote();
+randomQuote.explicit;
+randomQuote.implicit;
