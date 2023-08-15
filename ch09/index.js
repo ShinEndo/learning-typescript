@@ -159,3 +159,15 @@ try {
 catch (error) {
     console.warn("Oh no!", error instanceof Error ? error.message : error);
 }
+// 9.4.2　非nullアサーション
+// *************************************************
+var maybeDate = Math.random() > 0.5 ? undefined : new Date();
+var checkData = maybeDate;
+var checkData2 = maybeDate;
+var checkData3 = maybeDate;
+var seasonCounts = new Map([["I Love Lucy", 6], ["The Golden Girls", 7]]);
+var maybeValue = seasonCounts.get("I Love Lucy");
+// console.log(maybeValue.toString());
+console.log(maybeValue.toString());
+var knownValue = seasonCounts.get("The Golden Girls");
+console.log(knownValue.toString());

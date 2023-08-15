@@ -192,4 +192,21 @@ try {
     console.warn("Oh no!", error instanceof Error ? error.message : error);
 }
 
+// 9.4.2　非nullアサーション
+// *************************************************
+let maybeDate = Math.random() > 0.5 ? undefined : new Date();
 
+const checkData = maybeDate as Date;
+
+const checkData2 = maybeDate!;
+
+const checkData3 = maybeDate;
+
+const seasonCounts = new Map([["I Love Lucy", 6],["The Golden Girls", 7]]);
+
+const maybeValue = seasonCounts.get("I Love Lucy");
+// console.log(maybeValue.toString());
+console.log(maybeValue!.toString());
+
+const knownValue = seasonCounts.get("The Golden Girls")!;
+console.log(knownValue.toString());
