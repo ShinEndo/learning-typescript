@@ -229,3 +229,39 @@ var object = {
 // ※ constで宣言したオブジェクトのプロパティをリテラル型にしたい場合、
 //   「as const」で明示的に宣言する必要がある 
 // ---------------------------------------------------
+// 9.5.2　読み取り専用オブジェクト
+// *************************************************
+function describePreference(preference) {
+    switch (preference) {
+        case "maybe":
+            return "I suppose ...";
+        case "no":
+            return "No thanks";
+        case "yes":
+            return "Yes please!";
+    }
+}
+var preferencesMutable = {
+    movie: "maybe",
+    standup: "yes",
+};
+// movieがstring型のためエラー
+// describePreference(preferencesMutable.movie);
+preferencesMutable.movie = "no";
+var preferenceReadonly = {
+    movie: "maybe",
+    standup: "yes",
+};
+describePreference(preferenceReadonly.movie);
+// readonlyのため、エラーになる
+// preferenceReadonly.movie = "no";
+var preferenceReadonly2 = {
+    movie: "maybe",
+    standup: "yes",
+};
+// MEMO 
+// ---------------------------------------------------
+// ※ オブジェクトリテラルに「as const」を使って宣言すると、
+//   すべてのメンバーが「as const」で宣言されたのと同義になる
+// ※ 「as const」の効果は、let・constどちらの変数宣言でも同様
+// ---------------------------------------------------
