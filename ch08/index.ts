@@ -206,3 +206,43 @@ class Student implements Learner {
 //     name;
 //     study(hours):  {}
 // } <- エラーになる
+
+// 8.4.1　複数インターフェースの実装
+// *************************************************
+interface Granded {
+    grandes: number[];
+}
+
+interface Reporter {
+    report: () => string;
+}
+
+class ReportCard implements Granded,Reporter {
+    grandes: number[];
+
+    constructor(grandes: number[]) {
+        this.grandes = grandes;
+    }
+
+    report(){
+        return this.grandes.join(", ");
+    }
+}
+
+// class Empty implements Granded,Reporter {} <- エラーになる
+
+interface AgeIsNumber {
+    age: number;
+}
+
+interface AgeIsNotNumber {
+    age: () => string;
+}
+
+// class AsNumber implements AgeIsNumber,AgeIsNotNumber {
+//     age =0;
+// } <- エラーになる
+
+// class NotAsNumber implements AgeIsNumber,AgeIsNotNumber {
+//     age(){return "";}
+// } <- エラーになる

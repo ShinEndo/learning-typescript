@@ -169,10 +169,18 @@ var Student = /** @class */ (function () {
     };
     return Student;
 }());
-// class Slacker implements Learner {
-//     name = "Rocky";
+var ReportCard = /** @class */ (function () {
+    function ReportCard(grandes) {
+        this.grandes = grandes;
+    }
+    ReportCard.prototype.report = function () {
+        return this.grandes.join(", ");
+    };
+    return ReportCard;
+}());
+// class AsNumber implements AgeIsNumber,AgeIsNotNumber {
+//     age =0;
 // } <- エラーになる
-// class Student2 implements Learner {
-//     name;
-//     study(hours):  {}
+// class NotAsNumber implements AgeIsNumber,AgeIsNotNumber {
+//     age(){return "";}
 // } <- エラーになる
