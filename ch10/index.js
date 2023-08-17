@@ -46,10 +46,14 @@ var makedPai = makePai("abc", 123);
 // OK: どちらの型引数も指定しているので
 var makedPai2 = makePai("abc", 123);
 var makedpai3 = makePai("abc", 123);
-// NG: 引数の数よりも少ない数の型引数を指定した場合、エラーになる
-// const makedPai4 = makePai<string>("abc",123);
-// NG: 引数の数よりも多い数の型引数を指定した場合も同様にエラーになる
-// const makedPai5 = makePai<string,number,boolean>("abc",123);
-// NG: 型引数と引数の型が違う場合、エラーになる
-// const makedpai6 = makePai<number,string>("abc",123);
-// const makedpai7 = makePai<"abcd",1234>("abc",123);
+var stringBox = {
+    inside: "abc",
+};
+var numberBox = {
+    inside: 123,
+};
+// ジェネリックの型引数と一致しない場合、エラーになる
+// ex)「number」型の型引数を設定しているのに、insedeの型が「boolean」なので
+// let incorrectBox: Box<number> = {
+//     inside: false,
+// };

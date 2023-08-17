@@ -72,3 +72,23 @@ const makedpai3 = makePai<"abc",123>("abc",123);
 // const makedpai6 = makePai<number,string>("abc",123);
 // const makedpai7 = makePai<"abcd",1234>("abc",123);
 
+// 10.2　ジェネリックインターフェース
+// *************************************************
+interface Box<T> {
+    inside: T;
+}
+
+let stringBox: Box<string> = {
+    inside: "abc",
+};
+
+let numberBox: Box<number> = {
+    inside: 123,
+};
+
+// ジェネリックの型引数と一致しない場合、エラーになる
+// ex)「number」型の型引数を設定しているのに、insedeの型が「boolean」なので
+// let incorrectBox: Box<number> = {
+//     inside: false,
+// };
+
