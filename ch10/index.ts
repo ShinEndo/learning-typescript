@@ -92,3 +92,44 @@ let numberBox: Box<number> = {
 //     inside: false,
 // };
 
+// 10.2.1　ジェネリックインターフェースの型引数の推論
+// *************************************************
+interface LinkedNode<Value> {
+    next?: LinkedNode<Value>;
+    value: Value,
+}
+
+function getLast<Value>(node: LinkedNode<Value>): Value {
+    return node.next ? getLast(node.next) : node.value;
+}
+
+// 推論されるValueの型引数：Date
+let lastDate = getLast({
+    value: new Date("09-13-1993"),
+});
+
+// 推論されるValueの型引数：string
+let lastFruit = getLast({
+    next: {
+        value: "banana",
+    },
+    value: "apple",
+});
+
+// 推論されるValueの型引数：number
+let lastMismatch = getLast({
+    next: {
+        value: 123
+    },
+    // value: false, // エラーになる
+    value: 456,
+});
+
+interface CrateLike<T> {
+    contents: T;
+}
+
+// let missingGeneric: CrateLike = {
+//     contents: "??",
+// }
+

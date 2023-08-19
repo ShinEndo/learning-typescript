@@ -52,8 +52,28 @@ var stringBox = {
 var numberBox = {
     inside: 123,
 };
-// ジェネリックの型引数と一致しない場合、エラーになる
-// ex)「number」型の型引数を設定しているのに、insedeの型が「boolean」なので
-// let incorrectBox: Box<number> = {
-//     inside: false,
-// };
+function getLast(node) {
+    return node.next ? getLast(node.next) : node.value;
+}
+// 推論されるValueの型引数：Date
+var lastDate = getLast({
+    value: new Date("09-13-1993"),
+});
+// 推論されるValueの型引数：string
+var lastFruit = getLast({
+    next: {
+        value: "banana",
+    },
+    value: "apple",
+});
+// 推論されるValueの型引数：number
+var lastMismatch = getLast({
+    next: {
+        value: 123
+    },
+    // value: false, // エラーになる
+    value: 456,
+});
+// let missingGeneric: CrateLike = {
+//     contents: "??",
+// }
