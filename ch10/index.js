@@ -181,3 +181,16 @@ var AttributedQuote10 = /** @class */ (function (_super) {
     return AttributedQuote10;
 }(Quote10));
 var attributedQoute10 = new AttributedQuote10("The roadvto success is always under construction.", "Lily Tomlin");
+var MoviePart = /** @class */ (function () {
+    function MoviePart(role, speaking) {
+        this.role = role;
+        this.speaking = speaking;
+    }
+    return MoviePart;
+}());
+var part = new MoviePart("Mirinda Priestly", true);
+console.log(part.role, part.speaking);
+// インターフェースの型と違う型でclassを作成使用した場合、エラーになる
+// class IncorrectExtension implements ActingCredit<string> {
+//     role: boolean;
+// }

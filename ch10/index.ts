@@ -220,3 +220,27 @@ class AttributedQuote10<Value> extends Quote10<Value> {
 }
 const attributedQoute10 = new AttributedQuote10("The roadvto success is always under construction.", "Lily Tomlin");
 
+
+// 10.3.3　ジェネリックインターフェースの実装
+// *************************************************
+interface ActingCredit<Role> {
+    role: Role;
+}
+
+class MoviePart implements ActingCredit<string> {
+    role: string;
+    speaking: boolean;
+
+    constructor(role: string, speaking: boolean) {
+        this.role = role;
+        this.speaking = speaking;
+    }
+}
+
+const part = new MoviePart("Mirinda Priestly", true);
+console.log(part.role, part.speaking);
+
+// インターフェースの型と違う型でclassを作成使用した場合、エラーになる
+// class IncorrectExtension implements ActingCredit<string> {
+//     role: boolean;
+// }
