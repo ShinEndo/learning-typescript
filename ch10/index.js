@@ -1,3 +1,30 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _CurriedCallback_callback;
 // 10　ジェネリック
 // *************************************************
 function identity(input) {
@@ -28,9 +55,9 @@ var checkLogWrapper = logWrapper(function (input) { return console.log(input.len
 checkLogWrapper("checking");
 // 型：（input: unknown) => void
 // 型引数を明示的にしない場合、型推論ができない場合がある
-// その際、型引数はunknown型になる。結果、
-var checkLogWrapper2 = logWrapper(function (input) { return console.log(input.length); });
-checkLogWrapper2("checking2");
+// その際、型引数はunknown型になる。結果、型安全性が下がり、エラーの機会が多くなる
+// const checkLogWrapper2 = logWrapper((input) => console.log(input.length));
+// checkLogWrapper2("checking2");
 // 型：（input: string) => void
 logWrapper(function (input) { return console.log(input.length); });
 // logWrapper<string>((input:boolean) => {}); // エラーになる
@@ -81,3 +108,76 @@ var lastMismatch = getLast({
 // let missingGeneric: CrateLike = {
 //     contents: "??",
 // }
+// 10.3　ジェネリッククラス
+// *************************************************
+var Secret = /** @class */ (function () {
+    function Secret(key, value) {
+        this.key = key;
+        this.value = value;
+    }
+    Secret.prototype.getValue = function (key) {
+        return this.key === key ? this.value : undefined;
+    };
+    return Secret;
+}());
+var storage = new Secret(12345, "luggage");
+var storageValue = storage.getValue(1987);
+console.log(storageValue);
+// 10.3.1　明示的なジェネリッククラスの型
+// *************************************************
+var CurriedCallback = /** @class */ (function () {
+    function CurriedCallback(callback) {
+        _CurriedCallback_callback.set(this, void 0);
+        __classPrivateFieldSet(this, _CurriedCallback_callback, function (input) {
+            console.log("Input:", input);
+            callback(input);
+        }, "f");
+    }
+    CurriedCallback.prototype.call = function (input) {
+        __classPrivateFieldGet(this, _CurriedCallback_callback, "f").call(this, input);
+    };
+    return CurriedCallback;
+}());
+_CurriedCallback_callback = new WeakMap();
+// 型：CurriedCallback<string>
+var callbackString = new CurriedCallback(function (input) { return console.log(input.length); });
+callbackString.call('text');
+// 型：CurriedCallback<unknown>
+// 引数の型がunknownのため、引数inputでlengthプロパティが使えるかわからない → 結果、エラーになる
+// const callbackUnknown = new CurriedCallback(input => console.log(input.length));
+// 明示的にジェネリックの型を指定するとエラーにならない
+new CurriedCallback(function (input) { return console.log(input.length); });
+// 明示的にジェネリックの型を指定した場合、ジェネリックの型と一致しない場所でエラーになる
+// new CurriedCallback<string>((input:boolean) => console.log(input));
+// 10.3.2　ジェネリッククラスの拡張
+// *************************************************
+var Quote10 = /** @class */ (function () {
+    function Quote10(lines) {
+        this.lines = lines;
+    }
+    return Quote10;
+}());
+var SpokenQuopte10 = /** @class */ (function (_super) {
+    __extends(SpokenQuopte10, _super);
+    function SpokenQuopte10() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    SpokenQuopte10.prototype.speak = function () {
+        console.log(this.lines.join("\n"));
+    };
+    return SpokenQuopte10;
+}(Quote10));
+var quote10String = new Quote10("The only real failure is the failure to try.").lines;
+var quote10Number = new Quote10([4, 5, 6, 7, 8, 9, 10]).lines;
+// extendsで継承した際の型と違うためエラーになる
+// const spokenQuote10 = new SpokenQuopte10([4,5,6,7,8,9,10]);
+var AttributedQuote10 = /** @class */ (function (_super) {
+    __extends(AttributedQuote10, _super);
+    function AttributedQuote10(value, speaker) {
+        var _this = _super.call(this, value) || this;
+        _this.speaker = speaker;
+        return _this;
+    }
+    return AttributedQuote10;
+}(Quote10));
+var attributedQoute10 = new AttributedQuote10("The roadvto success is always under construction.", "Lily Tomlin");

@@ -137,3 +137,86 @@ interface CrateLike<T> {
 //     contents: "??",
 // }
 
+
+// 10.3　ジェネリッククラス
+// *************************************************
+class Secret<Key,Value> {
+    key: Key;
+    value: Value;
+
+    constructor(key: Key, value: Value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    getValue(key:Key) : Value | undefined {
+        return this.key === key ? this.value : undefined;
+    }
+}
+
+const storage = new Secret(12345, "luggage");
+const storageValue = storage.getValue(1987);
+console.log(storageValue);
+
+// 10.3.1　明示的なジェネリッククラスの型
+// *************************************************
+class CurriedCallback<Input> {
+    #callback: (input: Input) => void;
+
+    constructor(callback: (input:Input) => void ) {
+        this.#callback = (input: Input) => {
+            console.log("Input:", input);
+            callback(input);
+        }
+    }
+
+    call(input: Input) {
+        this.#callback(input);
+    }
+}
+
+// 型：CurriedCallback<string>
+const callbackString = new CurriedCallback((input:string)=>console.log(input.length));
+callbackString.call('text');
+
+// 型：CurriedCallback<unknown>
+// 引数の型がunknownのため、引数inputでlengthプロパティが使えるかわからない → 結果、エラーになる
+// const callbackUnknown = new CurriedCallback(input => console.log(input.length));
+// 明示的にジェネリックの型を指定するとエラーにならない
+new CurriedCallback<string>(input => console.log(input.length));
+
+// 明示的にジェネリックの型を指定した場合、ジェネリックの型と一致しない場所でエラーになる
+// new CurriedCallback<string>((input:boolean) => console.log(input));
+
+// 10.3.2　ジェネリッククラスの拡張
+// *************************************************
+class Quote10<T> {
+    lines: T;
+
+    constructor(lines: T) {
+        this.lines = lines;
+    }
+}
+
+class SpokenQuopte10 extends Quote10<string[]> {
+    speak() {
+        console.log(this.lines.join("\n"));
+    }
+}
+
+const quote10String = new Quote10("The only real failure is the failure to try.").lines;
+const quote10Number = new Quote10([4,5,6,7,8,9,10]).lines;
+
+// extendsで継承した際の型と違うためエラーになる
+// const spokenQuote10 = new SpokenQuopte10([4,5,6,7,8,9,10]);
+
+class AttributedQuote10<Value> extends Quote10<Value> {
+    speaker: string;
+
+    constructor(value: Value, speaker: string) {
+        super(value);
+        this.speaker = speaker;
+    }
+}
+const attributedQoute10 = new AttributedQuote10("The roadvto success is always under construction.", "Lily Tomlin");
+
