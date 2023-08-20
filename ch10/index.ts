@@ -244,3 +244,31 @@ console.log(part.role, part.speaking);
 // class IncorrectExtension implements ActingCredit<string> {
 //     role: boolean;
 // }
+
+// 10.3.4　メソッドのジェネリック
+// *************************************************
+class CreatePairFactory<Key> {
+    key: Key;
+
+    constructor(key: Key) {
+        this.key = key;
+    }
+
+    createPair<Value>(value: Value) {
+        return {key: this.key,value};
+    }
+}
+
+// 型：CreatePairFactory<string>
+const factory = new CreatePairFactory("role");
+
+// 型：{key: string, value: number }
+const numberPair = factory.createPair(10);
+console.log(numberPair);
+
+// 型：{key: string, value:string }
+const stringPair = factory.createPair("Sophie");
+console.log(stringPair);
+
+
+

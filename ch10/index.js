@@ -194,3 +194,22 @@ console.log(part.role, part.speaking);
 // class IncorrectExtension implements ActingCredit<string> {
 //     role: boolean;
 // }
+// 10.3.4　メソッドのジェネリック
+// *************************************************
+var CreatePairFactory = /** @class */ (function () {
+    function CreatePairFactory(key) {
+        this.key = key;
+    }
+    CreatePairFactory.prototype.createPair = function (value) {
+        return { key: this.key, value: value };
+    };
+    return CreatePairFactory;
+}());
+// 型：CreatePairFactory<string>
+var factory = new CreatePairFactory("role");
+// 型：{key: string, value: number }
+var numberPair = factory.createPair(10);
+console.log(numberPair);
+// 型：{key: string, value:string }
+var stringPair = factory.createPair("Sophie");
+console.log(stringPair);
