@@ -235,4 +235,12 @@ BothLogger.staticLog([false, true]);
 BothLogger.staticLog("You can't change the music of your soul.");
 var creator;
 creator = function (text) { return text.length; };
-// creator = text => text.toUpperCase();
+function handleResult(result) {
+    if (result.succeeded) {
+        console.log("We did it! ".concat(result.data));
+    }
+    else {
+        console.log("Awwww... ".concat(result.error));
+    }
+    // return result.data;
+}
