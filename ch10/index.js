@@ -213,3 +213,23 @@ console.log(numberPair);
 // 型：{key: string, value:string }
 var stringPair = factory.createPair("Sophie");
 console.log(stringPair);
+// 10.3.5　クラスの静的メンバーのジェネリック
+// *************************************************
+var BothLogger = /** @class */ (function () {
+    function BothLogger() {
+    }
+    BothLogger.prototype.instnceLog = function (value) {
+        console.log(value);
+        return value;
+    };
+    BothLogger.staticLog = function (value) {
+        // let fromInstance: OnInstance;
+        console.log(value);
+        return value;
+    };
+    return BothLogger;
+}());
+var logger = new BothLogger;
+logger.instnceLog([1, 2, 3]);
+BothLogger.staticLog([false, true]);
+BothLogger.staticLog("You can't change the music of your soul.");

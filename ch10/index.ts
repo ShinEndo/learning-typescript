@@ -270,5 +270,27 @@ console.log(numberPair);
 const stringPair = factory.createPair("Sophie");
 console.log(stringPair);
 
+// 10.3.5　クラスの静的メンバーのジェネリック
+// *************************************************
+class BothLogger<OnInstance> {
+    instnceLog(value: OnInstance) {
+        console.log(value);
+        return value;
+    }
+
+    static staticLog<OnStatic>(value: OnStatic) {
+        // let fromInstance: OnInstance;
+
+        console.log(value);
+        return value;
+    }
+}
+
+const logger = new BothLogger<number[]>;
+logger.instnceLog([1,2,3]);
+
+BothLogger.staticLog([false,true]);
+
+BothLogger.staticLog<string>("You can't change the music of your soul.");
 
 
