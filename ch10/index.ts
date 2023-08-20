@@ -31,10 +31,14 @@ function logWrapper<Input>(callback: (input:Input)=>void) {
 }
 
 // 型：（input: string) => void
-logWrapper((input:string) => console.log(input.length));
+const checkLogWrapper = logWrapper((input:string) => console.log(input.length));
+checkLogWrapper("checking");
 
 // 型：（input: unknown) => void
-// logWrapper((input) => console.log(input.length)); // エラーになる
+// 型引数を明示的にしない場合、型推論ができない場合がある
+// その際、型引数はunknown型になる。結果、型安全性が下がり、エラーの機会が多くなる
+// const checkLogWrapper2 = logWrapper((input) => console.log(input.length));
+// checkLogWrapper2("checking2");
 
 // 型：（input: string) => void
 logWrapper<string>((input:string) => console.log(input.length));

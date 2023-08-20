@@ -24,9 +24,13 @@ function logWrapper(callback) {
     };
 }
 // 型：（input: string) => void
-logWrapper(function (input) { return console.log(input.length); });
+var checkLogWrapper = logWrapper(function (input) { return console.log(input.length); });
+checkLogWrapper("checking");
 // 型：（input: unknown) => void
-// logWrapper((input) => console.log(input.length)); // エラーになる
+// 型引数を明示的にしない場合、型推論ができない場合がある
+// その際、型引数はunknown型になる。結果、
+var checkLogWrapper2 = logWrapper(function (input) { return console.log(input.length); });
+checkLogWrapper2("checking2");
 // 型：（input: string) => void
 logWrapper(function (input) { return console.log(input.length); });
 // logWrapper<string>((input:boolean) => {}); // エラーになる
