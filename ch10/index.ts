@@ -293,4 +293,16 @@ BothLogger.staticLog([false,true]);
 
 BothLogger.staticLog<string>("You can't change the music of your soul.");
 
+// 10.4　ジェネリック型エイリアス
+// *************************************************
+type NUllish<T> = T | null | undefined;
+
+type CreateValue<Input,Output> = (input:Input) => Output;
+
+let creator: CreateValue<string,number>;
+
+creator = text => text.length;
+
+// creator = text => text.toUpperCase();
+
 

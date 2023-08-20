@@ -233,3 +233,6 @@ var logger = new BothLogger;
 logger.instnceLog([1, 2, 3]);
 BothLogger.staticLog([false, true]);
 BothLogger.staticLog("You can't change the music of your soul.");
+var creator;
+creator = function (text) { return text.length; };
+// creator = text => text.toUpperCase();
