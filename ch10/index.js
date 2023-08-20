@@ -244,3 +244,20 @@ function handleResult(result) {
     }
     // return result.data;
 }
+var explicit = { value: 123 };
+var implicit = { value: "Be yourself. The world worships the original." };
+var allExplicit = {
+    key: "rating",
+    value: 10
+};
+var oneDefalut = {
+    key: "rating",
+    // value: 123,
+    value: "ten",
+};
+// let firstMissing: KeyValuePair = {
+//     key: "rating",
+//     value: 10,
+// }
+function inTheEnd() { }
+// function inTheMiddle<First,Second = boolean,Third = number, Fourth>(){}

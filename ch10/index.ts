@@ -330,6 +330,42 @@ function handleResult(result: Result<string>) {
     // return result.data;
 }
 
+// 10.5　ジェネリック修飾子
+// *************************************************
+// 10.5.1　ジェネリックのデフォルト型
+// *************************************************
+interface Quote10_5<T = string> {
+    value: T;
+}
+
+let explicit: Quote10_5<number> = { value: 123 };
+let implicit: Quote10_5 = {value: "Be yourself. The world worships the original."};
+// let mismatch: Quote10_5 = {value: 123};
+
+interface KeyValuePair<Key, Value = Key> {
+    key: Key;
+    value: Value;
+}
+
+let allExplicit: KeyValuePair<string,number> = {
+    key: "rating",
+    value: 10
+};
+
+let oneDefalut: KeyValuePair<string> = {
+    key: "rating",
+    // value: 123,
+    value: "ten",
+};
+
+// let firstMissing: KeyValuePair = {
+//     key: "rating",
+//     value: 10,
+// }
+
+function inTheEnd<First,Second,Third = number, Fourth = string>() {}
+// function inTheMiddle<First,Second = boolean,Third = number, Fourth>(){}
+
 
 
 
