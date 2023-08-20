@@ -260,4 +260,28 @@ var oneDefalut = {
 //     value: 10,
 // }
 function inTheEnd() { }
-// function inTheMiddle<First,Second = boolean,Third = number, Fourth>(){}
+function logWithLength(input) {
+    console.log("Length: ".concat(input.length));
+    return input;
+}
+logWithLength("No one can figure out your worth but you.");
+logWithLength([false, true]);
+logWithLength({ length: 123 });
+// logWithLength(new Date());
+// logWithLength(true);
+// 10.6.1　keyofと制約付き型パラメーター
+// *************************************************
+function get(container, key) {
+    return container[key];
+}
+var roles = {
+    favorite: "Fargo",
+    others: ["Almost Famous", "Burn After Reading", "Nomadland"],
+};
+var favorite = get(roles, "favorite");
+var others = get(roles, "others");
+// const missing = get(roles,"extras");
+function get2(container, key) {
+    return container[key];
+}
+var found = get2(roles, "favorite");

@@ -367,5 +367,42 @@ function inTheEnd<First,Second,Third = number, Fourth = string>() {}
 // function inTheMiddle<First,Second = boolean,Third = number, Fourth>(){}
 
 
+// 10.6　制約付きジェネリック型
+// *************************************************
+interface WithLength {
+    length: Number;
+}
 
+function logWithLength<T extends WithLength>(input: T) {
+    console.log(`Length: ${input.length}`);
+    return input;
+}
+
+logWithLength("No one can figure out your worth but you.");
+logWithLength([false,true]);
+logWithLength({length: 123});
+// logWithLength(new Date());
+// logWithLength(true);
+
+// 10.6.1　keyofと制約付き型パラメーター
+// *************************************************
+function get<T, Key extends keyof T>(container: T,key: Key) {
+    return container[key];
+}
+
+const roles = {
+    favorite: "Fargo",
+    others: ["Almost Famous", "Burn After Reading", "Nomadland"],
+};
+
+const favorite = get(roles, "favorite");
+const others = get(roles,"others");
+
+// const missing = get(roles,"extras");
+
+function get2<T>(container: T, key: keyof T) {
+    return container[key];
+}
+
+const found = get2(roles,"favorite");
 
