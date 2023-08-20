@@ -451,3 +451,22 @@ async function givesPromiseForString(): Promise<string> {
 // async function givesString(): string {
 //     return "Done!"; 
 // }
+
+// 10.8　ジェネリックを適切に使う
+// *************************************************
+// 10.8.1　ジェネリックの黄金律
+// *************************************************
+function logInput<Input extends string>(input: Input){
+    console.log("Hi!", input);
+}
+// 10.8.2　ジェネリックの命名規則
+// *************************************************
+// Memo
+// -------------------------------------------------
+// 状態管理のライブラリでは<S>が多い
+// データ構造を表すジェネリックは<K,V>が多い
+
+// Bad Practice | 変数や型が何を意味しているのかわからない
+function BadLabelBox<L,V>(l:L,v:V){}
+// Good Practice | 変数や型が何を意味しているのかわかりやすい
+function GoodlabelBox<Label,Value>(label: Label, value: Value){}
