@@ -29,3 +29,4 @@ declare const firstName: "Liz";
 // コンパイル時にエラーになる
 // const lastName = "Lemon";
 
+
