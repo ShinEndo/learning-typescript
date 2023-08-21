@@ -29,4 +29,10 @@ declare const firstName: "Liz";
 // コンパイル時にエラーになる
 // const lastName = "Lemon";
 
+// 11.2.3　グローバルな拡張
+// *************************************************
+declare global {
+    
+}
+
 
