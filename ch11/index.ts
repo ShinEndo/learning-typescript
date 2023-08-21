@@ -44,3 +44,8 @@ export function logLines(lines: string[]){
     lines.forEach(()=>{});
 }
 
+// 11.4 モジュール宣言
+// *************************************************
+import {value} from "my-example-lib";
+console.log(value);
+
