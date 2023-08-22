@@ -1,11 +1,12 @@
+"use strict";
 // 7　インターフェース
 // *************************************************
-var valueLater;
+let valueLater;
 valueLater = {
     born: 1935,
     name: "Sara Teasdale"
 };
-var ok7 = {
+const ok7 = {
     author: "Rita Dove",
     pages: 80,
 };
@@ -13,53 +14,53 @@ var ok7 = {
 //     console.log(page.text);
 //     page.text += "!";
 // } <- エラーになる
-var pageIsh = {
+const pageIsh = {
     text: "Hello, world!",
 };
 pageIsh.text += "!";
-var hasBoth7 = {
-    property: function () { return ""; },
-    method: function () {
+const hasBoth7 = {
+    property: () => "",
+    method() {
         return "";
     },
 };
 hasBoth7.property();
 hasBoth7.method();
-var typedFunctionAlias = function (input) { return input.length; };
-var typedCallSignature = function (input) { return input.length; };
-var hasCallCount;
+const typedFunctionAlias = input => input.length;
+const typedCallSignature = input => input.length;
+let hasCallCount;
 function keepsTrackOfCalls() {
     keepsTrackOfCalls.count += 1;
-    console.log("I've been called ".concat(keepsTrackOfCalls.count, " times!"));
+    console.log(`I've been called ${keepsTrackOfCalls.count} times!`);
 }
 keepsTrackOfCalls.count = 0;
 hasCallCount = keepsTrackOfCalls;
 function doesNotHaveCount() {
     console.log("No idea!");
 }
-var counts = {};
+const counts = {};
 counts.apple = 0;
 counts.banana = 1;
-var publishDates = {
+const publishDates = {
     Frankenstein: new Date("1 Januarry 1818"),
 };
 publishDates.Frankenstein;
 console.log(publishDates.Frankenstein.toString());
-var novels = {
+const novels = {
     Outlander: 1991,
     Oroonoko: 1688,
 };
-var correctPreface = {
+const correctPreface = {
     preface: 0,
     night: 1,
     shopping: 5,
 };
-var mixesNumbersAndStrings = {
+const mixesNumbersAndStrings = {
     0: "",
     key1: "",
     key2: undefined,
 };
-var myNovel;
+let myNovel;
 myNovel = {
     author: {
         name: 'Jane Austen',
@@ -70,7 +71,7 @@ myNovel = {
     }
 };
 ;
-var myNobella = {
+let myNobella = {
     title: 'Ethan Frome',
     pages: 195,
 };
