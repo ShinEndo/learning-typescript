@@ -1,3 +1,4 @@
+"use strict";
 // 5　関数
 // *************************************************
 // 5.1　関数のパラメーター
@@ -6,12 +7,12 @@
 //     console.log(`Singing: ${song}`);
 // }
 function sing(song) {
-    console.log("Singing: ".concat(song));
+    console.log(`Singing: ${song}`);
 }
 // 5.1.1　必須パラメーター
 // *************************************************
 function singTwo(first, second) {
-    console.log("".concat(first, " / ").concat(second));
+    console.log(`${first} / ${second}`);
 }
 // singTwo("Ball and Chain"); <- エラーになる
 singTwo("I will Survice", "Higher Love");
@@ -19,9 +20,9 @@ singTwo("I will Survice", "Higher Love");
 // 5.1.2　オプションパラメーター
 // *************************************************
 function announceSong(song, singer) {
-    console.log("Song: ".concat(song));
+    console.log(`Song: ${song}`);
     if (singer) {
-        console.log("Singer: ".concat(singer));
+        console.log(`Singer: ${singer}`);
     }
 }
 ;
@@ -29,9 +30,9 @@ announceSong("Grrensleeves");
 announceSong("Grrensleeves", undefined);
 announceSong("Grrensleeves", "Sia");
 function announceSongBy(song, singer) {
-    console.log("Song: ".concat(song));
+    console.log(`Song: ${song}`);
     if (singer) {
-        console.log("Singer: ".concat(singer));
+        console.log(`Singer: ${singer}`);
     }
 }
 // announceSongBy("Grrensleeves"); <- エラーになる
@@ -39,9 +40,8 @@ announceSongBy("Grrensleeves", undefined);
 announceSongBy("Grrensleeves", "Sia");
 // 5.1.3　デフォルトパラメーター
 // *************************************************
-function rateSong(song, rating) {
-    if (rating === void 0) { rating = 0; }
-    console.log("".concat(song, " gets ").concat(rating, " / 5 stars!"));
+function rateSong(song, rating = 0) {
+    console.log(`${song} gets ${rating} / 5 stars!`);
 }
 rateSong("Photograph");
 rateSong("Set Fire to the Rain", 5);
@@ -49,14 +49,9 @@ rateSong("Set Fire to the Rain", undefined);
 // rateSong("At Last!", "100"); <- エラーになる
 // 5.1.4　レストパラメーター
 // *************************************************
-function singAllTheSongs(singer) {
-    var songs = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        songs[_i - 1] = arguments[_i];
-    }
-    for (var _a = 0, songs_1 = songs; _a < songs_1.length; _a++) {
-        var song = songs_1[_a];
-        console.log("".concat(song, ", by ").concat(singer));
+function singAllTheSongs(singer, ...songs) {
+    for (const song of songs) {
+        console.log(`${song}, by ${singer}`);
     }
 }
 ;
@@ -66,9 +61,8 @@ singAllTheSongs("Lady Gaga", "Bad Romance", "Just Dance", "Poker Face");
 // 5.2　戻り値の型
 // *************************************************
 function singSongs(songs) {
-    for (var _i = 0, songs_2 = songs; _i < songs_2.length; _i++) {
-        var song = songs_2[_i];
-        console.log("".concat(song));
+    for (const song of songs) {
+        console.log(`${song}`);
     }
     return songs.length;
 }
@@ -79,14 +73,10 @@ function getSongAt(songs, index) {
 ;
 // 5.2.1　明示的な戻り値の型
 // *************************************************
-function singSongRecursive(songs, count) {
-    if (count === void 0) { count = 0; }
+function singSongRecursive(songs, count = 0) {
     return songs.length ? singSongRecursive(songs.slice(1), count + 1) : count;
 }
-var singSongRecursive2 = function (songs, count) {
-    if (count === void 0) { count = 0; }
-    return songs.length ? singSongRecursive2(songs.slice(1), count + 1) : count;
-};
+const singSongRecursive2 = (songs, count = 0) => songs.length ? singSongRecursive2(songs.slice(1), count + 1) : count;
 function getSongRecordingDate(song) {
     switch (song) {
         case "Strange Fruit":
@@ -99,42 +89,42 @@ function getSongRecordingDate(song) {
 }
 // 5.3　関数の型
 // *************************************************
-var nothingInGivesString;
-var inputAndOutput;
-var songs = ["Juice", "Shake It Off", "What's Up"];
+let nothingInGivesString;
+let inputAndOutput;
+const songs = ["Juice", "Shake It Off", "What's Up"];
 function runOnSongs(getSongAt2) {
-    for (var i = 0; i < songs.length; i += 1) {
+    for (let i = 0; i < songs.length; i += 1) {
         console.log(getSongAt2(i));
     }
 }
 function getSongAt2(index) {
-    return "".concat(songs[index]);
+    return `${songs[index]}`;
 }
 runOnSongs(getSongAt2);
 function logSong(song) {
-    return "".concat(song);
+    return `${song}`;
 }
 // runOnSongs(logSong); <- エラーになる
 // 5.3.1　関数の型と括弧
 // *************************************************
-var returnsStringOrUndefined;
-var maybeReturnString;
+let returnsStringOrUndefined;
+let maybeReturnString;
 // 5.3.2　パラメーターの型推論
 // *************************************************
-var singer;
+let singer;
 singer = function (song) {
-    return "Singing: ".concat(song.toUpperCase());
+    return `Singing: ${song.toUpperCase()}`;
 };
-var songs2 = ["Juice", "Shake It Off", "What's Up"];
-songs2.forEach(function (song, index) {
-    console.log("".concat(song, " is at index ").concat(index));
+const songs2 = ["Juice", "Shake It Off", "What's Up"];
+songs2.forEach((song, index) => {
+    console.log(`${song} is at index ${index}`);
 });
-var stringToNumber;
-stringToNumber = function (input) { return input.length; };
+let stringToNumber;
+stringToNumber = (input) => input.length;
 function usesNumberToString(numberToString) {
-    console.log("The string is: ".concat(numberToString(1234)));
+    console.log(`The string is: ${numberToString(1234)}`);
 }
-usesNumberToString(function (input) { return "".concat(input, "! Hooray"); });
+usesNumberToString(input => `${input}! Hooray`);
 // usesNumberToString(input => input * 2); <- エラーになる
 // 5.4　その他の戻り値の型
 // *************************************************
@@ -143,33 +133,33 @@ usesNumberToString(function (input) { return "".concat(input, "! Hooray"); });
 function logSong2(song) {
     if (!song)
         return;
-    console.log("".concat(song));
+    console.log(`${song}`);
     // return true; <- エラーになる
 }
-var songLogger;
-songLogger = function (song) {
-    console.log("".concat(song));
+let songLogger;
+songLogger = (song) => {
+    console.log(`${song}`);
 };
 songLogger("Heart of Glass");
 function returnsVoid() {
     return;
 }
-var lazyValue;
+let lazyValue;
 // lazyValue = returnsVoid(); <- エラーになる
-var records = [];
+const records = [];
 function saveRecords(newRecords) {
-    newRecords.forEach(function (record) { return records.push(record); });
+    newRecords.forEach(record => records.push(record));
     console.log(records);
 }
 saveRecords(['21', 'Come On Over', 'The Bodyguard']);
 // 5.4.2　never
 // *************************************************
 function fail(message) {
-    throw new Error("Invariant failure: ".concat(message, "."));
+    throw new Error(`Invariant failure: ${message}.`);
 }
 function workWithUnsafeParam(param) {
     if (typeof param !== "string") {
-        fail("param should be a string, not ".concat(typeof param));
+        fail(`param should be a string, not ${typeof param}`);
     }
     param.toUpperCase();
 }
