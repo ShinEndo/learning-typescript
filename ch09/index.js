@@ -1,26 +1,16 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
+"use strict";
 // 9　型修飾子
 // *************************************************
 // 9.1　トップ型
 // *************************************************
 // 9.1.1　再び any
 // *************************************************
-var anyValue;
+let anyValue;
 anyValue = "lucille Ball";
 anyValue = 123;
 console.log(anyValue);
 function greetComedian(name) {
-    console.log("Announcing ".concat(name.toUpperCase(), "!"));
+    console.log(`Announcing ${name.toUpperCase()}!`);
 }
 greetComedian('Bea Arthur');
 // TypeScriptで型エラーにならないが、JavaScriptで実行するとクラッシュする
@@ -33,7 +23,7 @@ greetComedian('Bea Arthur');
 // }
 function greetComedian2(name) {
     if (typeof name === "string") {
-        console.log("Announcing ".concat(name.toUpperCase(), "!"));
+        console.log(`Announcing ${name.toUpperCase()}!`);
     }
     else {
         console.log("Well, I'm off.");
@@ -95,38 +85,38 @@ function getRating(ratings, key) {
     // TypeScriptの設定が厳格な場合、エラーになる
     return ratings[key];
 }
-var ratings = { audience: 77, critics: 84 };
+const ratings = { audience: 77, critics: 84 };
 console.log(getRating(ratings, 'audience'));
 console.log(getRating(ratings, 'not valid')); // コンパイルは通るけど、不正な値
 function getRating2(ratings, key) {
     return ratings[key];
 }
-var ratings2 = { audience: 77, critics: 84 };
+const ratings2 = { audience: 77, critics: 84 };
 console.log(getRating2(ratings2, 'audience'));
 // console.log(getRating2(ratings2, 'not valid')); <- エラーになる
 // 「keyof」によって、すべてのキーの合併型が簡潔に表現できる！
 function getRatingKeyof(ratings, key) {
     return ratings[key];
 }
-var ratings3 = { audience: 77, critics: 84 };
+const ratings3 = { audience: 77, critics: 84 };
 console.log(getRatingKeyof(ratings2, 'audience'));
 // console.log(getRatingKeyof(ratings2, 'not valid')); <- エラーになる
 // 9.3.2　typeof
 // *************************************************
-var original = {
+const original = {
     medium: "movie",
     title: "Mean Girls",
 };
-var adaptation;
+let adaptation;
 if (Math.random() > 0.5) {
-    adaptation = __assign(__assign({}, original), { medium: "play" });
+    adaptation = Object.assign(Object.assign({}, original), { medium: "play" });
 }
 else {
     // adaptation = {...original,medium:2};
 }
 // 9.3.2.1　keyof typeof
 // *************************************************
-var ratings4 = {
+const ratings4 = {
     imdb: 8.4,
     metacritic: 82,
 };
@@ -137,16 +127,16 @@ logRating('imdb');
 // logRating('invalid');
 // 9.4　型アサーション
 // *************************************************
-var rawData = "[\"grace\", \"frankie\"]";
-var data = JSON.parse(rawData);
-var data2 = JSON.parse(rawData);
-var data3 = JSON.parse(rawData);
-var data4 = JSON.parse(rawData);
+const rawData = `["grace", "frankie"]`;
+const data = JSON.parse(rawData);
+const data2 = JSON.parse(rawData);
+const data3 = JSON.parse(rawData);
+const data4 = JSON.parse(rawData);
 // ※ 型アサーションを使用すると、全く関係ない型に再定義できてしまう
-var invalidData2 = JSON.parse(rawData);
-var invalidData3 = JSON.parse(rawData);
-var invalidData4 = JSON.parse(rawData);
-var invalidData5 = JSON.parse(rawData);
+const invalidData2 = JSON.parse(rawData);
+const invalidData3 = JSON.parse(rawData);
+const invalidData4 = JSON.parse(rawData);
+const invalidData5 = JSON.parse(rawData);
 // 9.4.1　キャッチされるエラーの型アサーション
 // *************************************************
 try {
@@ -161,24 +151,24 @@ catch (error) {
 }
 // 9.4.2　非nullアサーション
 // *************************************************
-var maybeDate = Math.random() > 0.5 ? undefined : new Date();
-var checkData = maybeDate;
-var checkData2 = maybeDate;
-var checkData3 = maybeDate;
-var seasonCounts = new Map([["I Love Lucy", 6], ["The Golden Girls", 7]]);
-var maybeValue = seasonCounts.get("I Love Lucy");
+let maybeDate = Math.random() > 0.5 ? undefined : new Date();
+const checkData = maybeDate;
+const checkData2 = maybeDate;
+const checkData3 = maybeDate;
+const seasonCounts = new Map([["I Love Lucy", 6], ["The Golden Girls", 7]]);
+const maybeValue = seasonCounts.get("I Love Lucy");
 // console.log(maybeValue.toString());
 console.log(maybeValue.toString());
-var knownValue = seasonCounts.get("The Golden Girls");
+const knownValue = seasonCounts.get("The Golden Girls");
 console.log(knownValue.toString());
 // 9.4.3　型アサーションの注意事項
 // *************************************************
-var seasonCounts2 = new Map([["I Love Lucy", 6], ["The Golden Girls", 7]]);
-var knownValue2 = seasonCounts.get("Broad City");
+const seasonCounts2 = new Map([["I Love Lucy", 6], ["The Golden Girls", 7]]);
+const knownValue2 = seasonCounts.get("Broad City");
 // const declared: Entertainer = {
 //     name: "Moms Mabley",
 // }
-var asserted = {
+const asserted = {
     name: "Moms Mabley",
 };
 // TypeScriptではエラーにならないが、JavaScriptでクラッシュする
@@ -189,14 +179,14 @@ var asserted = {
 // *************************************************
 // プリミティブ型からプリミティブ型には変更できない
 // let myValue = "Stella!" as number;
-var myValueDouble = "1337";
+let myValueDouble = "1337";
 // 9.5　constアサーション
 // *************************************************
-var readonlyArray = [0, ''];
+const readonlyArray = [0, ''];
 // 9.5.1　リテラルとプリミティブ型
 // *************************************************
-var getName = function () { return "Maria Bamford"; };
-var getNameConst = function () { return "Maria Bamford"; };
+const getName = () => "Maria Bamford";
+const getNameConst = () => "Maria Bamford";
 function tellJoke(joke) {
     if (joke.style === "one-liner") {
         console.log(joke.quote);
@@ -205,12 +195,12 @@ function tellJoke(joke) {
         console.log(joke.quote.split("\n"));
     }
 }
-var narrowJoke = {
+const narrowJoke = {
     quote: "If you stay alive for no other reason do it for spite.",
     style: "one-liner"
 };
 tellJoke(narrowJoke);
-var wideJoke = {
+const wideJoke = {
     quote: "Time files when you are anxious",
     style: "one-liner"
 };
@@ -218,9 +208,9 @@ var wideJoke = {
 // tellJoke(wideJoke);
 // MEMO 
 // ---------------------------------------------------
-var literalData = "literal string";
+const literalData = "literal string";
 // ※ constで文字列を宣言したとき、型推論でリテラル型になるが、
-var object = {
+const object = {
     string: "invalid literal string",
     literalString: "literal string",
     number: 0,
@@ -241,21 +231,21 @@ function describePreference(preference) {
             return "Yes please!";
     }
 }
-var preferencesMutable = {
+const preferencesMutable = {
     movie: "maybe",
     standup: "yes",
 };
 // movieがstring型のためエラー
 // describePreference(preferencesMutable.movie);
 preferencesMutable.movie = "no";
-var preferenceReadonly = {
+const preferenceReadonly = {
     movie: "maybe",
     standup: "yes",
 };
 describePreference(preferenceReadonly.movie);
 // readonlyのため、エラーになる
 // preferenceReadonly.movie = "no";
-var preferenceReadonly2 = {
+let preferenceReadonly2 = {
     movie: "maybe",
     standup: "yes",
 };
