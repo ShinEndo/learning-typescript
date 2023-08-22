@@ -1,6 +1,7 @@
+"use strict";
 // 4.1 オブジェクト型
 // *************************************************
-var poet = {
+const poet = {
     born: 1935,
     name: "Mary Oliver",
 };
@@ -9,27 +10,27 @@ poet.name;
 // poet.end; <- エラーになる
 // 4.1.1　オブジェクト型の宣言
 // *************************************************
-var poetLater;
+let poetLater;
 poetLater = {
     born: 1935,
     name: "Mary Oliver",
 };
-var poetLater2;
+let poetLater2;
 poetLater2 = {
     born: 1935,
     name: "Mary Oliver",
 };
-var hasBoth = {
+const hasBoth = {
     firstName: "Lucille",
     lastName: "Clifton",
 };
-var withFirstName = hasBoth;
-var withLastName = hasBoth;
-var hasBoth2 = {
+let withFirstName = hasBoth;
+let withLastName = hasBoth;
+const hasBoth2 = {
     first: "Sarojini",
     last: "Naidu",
 };
-var poetMatch = {
+const poetMatch = {
     born: 1928,
     name: "Maya Angelou",
 };
@@ -38,43 +39,43 @@ var poetMatch = {
 //     born: 1935,
 //     name: "Mary Oliver",
 // }; <- エラーになる
-var poetMatch2 = {
+const poetMatch2 = {
     born: 1928,
     name: "Maya Angelou",
 };
-var soySoauce = {
+const soySoauce = {
     name: "醤油",
     amount: "大さじ１",
 };
-var soySauceWithSatisfies = {
+const soySauceWithSatisfies = {
     name: "醤油",
     amount: "大さじ１",
 };
-var soySauceWithTypeAnnotation = {
+const soySauceWithTypeAnnotation = {
     name: "醤油",
     amount: "大さじ１",
 };
 soySoauce.amount.length;
 soySauceWithSatisfies.amount.length;
 // soySauceWithTypeAnnotation.amount.length; <- エラーになる
-var existingObject = {
+const existingObject = {
     activity: "walking",
     born: 1935,
     name: "Mary Oliver",
 };
-var extraPropertyButOK = existingObject;
-var PoemMatch = {
+const extraPropertyButOK = existingObject;
+const PoemMatch = {
     author: {
         firstName: "Sylvia",
         lastName: "Plash",
     },
     name: "Lady Lazarus",
 };
-var ok = {
+const ok = {
     author: "Rita Dove",
     pages: 80,
 };
-var hasRequired = {
+const hasRequired = {
     author: undefined,
 };
 //const missingRequired: Writers = {}; <- エラーになる
@@ -82,11 +83,11 @@ var hasRequired = {
 // *************************************************
 // 4.3.1　オブジェクト型の合併型の型推論
 // *************************************************
-var poem4 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7 } : { name: "Her Kind", rhymes: true };
+const poem4 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7 } : { name: "Her Kind", rhymes: true };
 poem4.name;
 poem4.pages;
 poem4.rhymes;
-var poem5 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7 } : { name: "Her Kind", rhymes: true };
+const poem5 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7 } : { name: "Her Kind", rhymes: true };
 poem5.name;
 // poem5.pages; <- エラーになる
 // poem5.rhymes; <- エラーになる
@@ -98,15 +99,15 @@ if ("pages" in poem5) {
 else {
     poem5.rhymes;
 }
-var poem6 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7, type: 'pages' } : { name: "Her Kind", rhymes: true, type: 'rhymes' };
+const poem6 = Math.random() > 0.5 ? { name: "The Double Image", pages: 7, type: 'pages' } : { name: "Her Kind", rhymes: true, type: 'rhymes' };
 poem6.name;
 if (poem6.type === "pages") {
-    console.log("It's got pages: ".concat(poem6.pages));
+    console.log(`It's got pages: ${poem6.pages}`);
 }
 else {
-    console.log("It rhymes: ".concat(poem6.rhymes));
+    console.log(`It rhymes: ${poem6.rhymes}`);
 }
-var morningGlory = {
+const morningGlory = {
     author: "Fukuda Chiyo-ni",
     kigo: "Morning Glory",
     type: "haiku",
