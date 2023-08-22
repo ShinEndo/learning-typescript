@@ -9,13 +9,13 @@ console.log(myGlobalValue);
 // 11.2.2　グローバルなインターフェースのマージ
 // *************************************************
 function logWindowVersion() {
-    console.log("Window version is: ".concat(window.myVersion));
+    console.log(`Window version is: ${window.myVersion}`);
     window.alert("Built-in window types still work! Hooray!");
 }
 exports.logWindowVersion = logWindowVersion;
-var globals_1 = require("./types/globals");
+const globals_1 = require("./types/globals");
 function logData(data) {
-    console.log("Data version is ".concat(data.version));
+    console.log(`Data version is ${data.version}`);
 }
 // 型引数がData型じゃないのでエラーになる
 //logData("aaa");
@@ -26,19 +26,19 @@ logData(globals_1.locallyDeclared);
 // 11.3.1　ライブラリー宣言
 // *************************************************
 function logLines(lines) {
-    lines.forEach(function () { });
+    lines.forEach(() => { });
 }
 exports.logLines = logLines;
 // 11.4 モジュール宣言
 // *************************************************
-var my_example_lib_1 = require("my-example-lib");
+const my_example_lib_1 = require("my-example-lib");
 console.log(my_example_lib_1.value);
 // 11.5 パッケージの型
 // *************************************************
 // 11.5.1 declaration
 // *************************************************
-var greet = function (text) {
-    console.log("Hello, ".concat(text));
+const greet = (text) => {
+    console.log(`Hello, ${text}`);
 };
 exports.greet = greet;
 // 11.5.2 依存パッケージの型
