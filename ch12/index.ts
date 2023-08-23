@@ -39,8 +39,8 @@ logData(data2);
 // *************************************************
 // 12.3.1.1　[問題]タブ
 // *************************************************
-thisVariableDoesNotExist;
-thisVariableAlsoDoesNotExist;
+// thisVariableDoesNotExist;
+// thisVariableAlsoDoesNotExist;
 // 12.3.1.2　ターミナルでのコンパイラーの実行
 // *************************************************
 // 12.3.1.3　型を理解する
