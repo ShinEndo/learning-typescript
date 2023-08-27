@@ -65,3 +65,10 @@ var DisplayHint2;
     DisplayHint2[DisplayHint2["Transparent"] = 2] = "Transparent";
 })(DisplayHint2 || (DisplayHint2 = {}));
 var displayHint2 = DisplayHint2.Transparent;
+// 14.4　名前空間
+// *************************************************
+var Randomized;
+(function (Randomized) {
+    var value = Math.random();
+    console.log("My value is  ".concat(value));
+})(Randomized || (Randomized = {}));
