@@ -62,7 +62,7 @@ type JustProperties<T> = {
 
 type ResearcherProperties = JustProperties<Researcher>;
 
-// 15.2　修飾子の変更
+// 15.1.2　修飾子の変更
 // *************************************************
 interface Environmentalist {
   area: string;
@@ -121,3 +121,35 @@ const requiredWritableConservationist: RequiredWritableConservationist = {
   born: 0,
   died: 0,
 };
+
+// 15.1.3　ジェネリックマップ型
+// *************************************************
+type MakeReadonly<T> = {
+  readonly [K in keyof T]: T[K];
+};
+
+interface Species {
+  genus: string;
+  name: string;
+}
+
+type ReadonlySpecies = MakeReadonly<Species>;
+
+interface GenusData {
+  family: string;
+  name: string;
+}
+
+type MakeOptinal<T> = {
+  [K in keyof T]?: T[K];
+};
+
+type OptionalGenusData = MakeOptinal<GenusData>;
+
+function createGenusData(overrides?: MakeOptinal<GenusData>): GenusData {
+  return {
+    family: "unknown",
+    name: "unknown",
+    ...overrides,
+  };
+}
