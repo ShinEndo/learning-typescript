@@ -15,5 +15,28 @@ var nullableBirdVariants = {
     dove: null,
     eagle: null,
 };
-// 15.1.1　マップ型とシグネチャ
-// *************************************************
+// ReadonlyEnvironmentalistの挙動を確認する
+var readonlyEnvironmentalist = {
+    area: "string",
+    name: "strring",
+};
+// OptionalReadonlyEnvironmentalistの挙動を確認する
+var optionalReadonlyEnvironmentalistt = {};
+// Conservationistの挙動を確認する
+var conservationist = {
+    name: "string",
+    catchphrase: "string",
+    born: 0,
+};
+// WritableConservationistの挙動を確認する
+var writableConservationist = {
+    name: "string",
+    born: 0,
+};
+// RequiredWritableConservationistの挙動を確認する
+var requiredWritableConservationist = {
+    name: "string",
+    catchphrase: "string",
+    born: 0,
+    died: 0,
+};

@@ -49,5 +49,75 @@ const nullableBirdVariants: NullableBirdVariants = {
   eagle: null,
 };
 
-// 15.1.1　マップ型とシグネチャ
+// 15.1.1.1　マップ型とシグネチャ
 // *************************************************
+interface Researcher {
+  researchMethod(): void;
+  researchProperty: () => string;
+}
+
+type JustProperties<T> = {
+  [K in keyof T]: T[K];
+};
+
+type ResearcherProperties = JustProperties<Researcher>;
+
+// 15.2　修飾子の変更
+// *************************************************
+interface Environmentalist {
+  area: string;
+  name: string;
+}
+
+type ReadonlyEnvironmentalist = {
+  readonly [K in keyof Environmentalist]: Environmentalist[K];
+};
+
+type OptionalReadonlyEnvironmentalist = {
+  [K in keyof ReadonlyEnvironmentalist]?: ReadonlyEnvironmentalist[K];
+};
+
+// ReadonlyEnvironmentalistの挙動を確認する
+const readonlyEnvironmentalist: ReadonlyEnvironmentalist = {
+  area: "string",
+  name: "strring",
+};
+
+// OptionalReadonlyEnvironmentalistの挙動を確認する
+const optionalReadonlyEnvironmentalistt: OptionalReadonlyEnvironmentalist = {};
+
+interface Conservationist {
+  name: string;
+  catchphrase?: string;
+  readonly born: number;
+  readonly died?: number;
+}
+
+type WritableConservationist = {
+  -readonly [K in keyof Conservationist]: Conservationist[K];
+};
+
+type RequiredWritableConservationist = {
+  [K in keyof WritableConservationist]-?: WritableConservationist[K];
+};
+
+// Conservationistの挙動を確認する
+const conservationist: Conservationist = {
+  name: "string",
+  catchphrase: "string",
+  born: 0,
+};
+
+// WritableConservationistの挙動を確認する
+const writableConservationist: WritableConservationist = {
+  name: "string",
+  born: 0,
+};
+
+// RequiredWritableConservationistの挙動を確認する
+const requiredWritableConservationist: RequiredWritableConservationist = {
+  name: "string",
+  catchphrase: "string",
+  born: 0,
+  died: 0,
+};
