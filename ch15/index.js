@@ -54,3 +54,5 @@ var requiredWritableConservationist = {
 function createGenusData(overrides) {
     return __assign({ family: "unknown", name: "unknown" }, overrides);
 }
+var checkStringAgainstNumber = false;
+// const checkStringAgainstNumber2 : CheckStringAgainstNumber = true;

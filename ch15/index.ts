@@ -153,3 +153,9 @@ function createGenusData(overrides?: MakeOptinal<GenusData>): GenusData {
     ...overrides,
   };
 }
+
+// 15.2　条件型
+// *************************************************
+type CheckStringAgainstNumber = string extends number ? true: false;
+const checkStringAgainstNumber : CheckStringAgainstNumber = false;
+// const checkStringAgainstNumber2 : CheckStringAgainstNumber = true;
