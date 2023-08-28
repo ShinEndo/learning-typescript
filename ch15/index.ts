@@ -339,6 +339,9 @@ type TurnIntoGetters<T> = {
 
 type GettersJustString = TurnIntoGetters<HasStringAndSymbol>;
 
+// 15.5　型演算と複雑さ
+// *************************************************
+
 
 
 

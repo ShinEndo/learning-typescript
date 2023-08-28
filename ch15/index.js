@@ -128,3 +128,5 @@ function withlazyValues(configGetter) {
 //   [K in keyof T as `get${K}`]: () => T[K];
 // }
 var someSymbol = Symbol("");
+// 15.5　型演算と複雑さ
+// *************************************************
