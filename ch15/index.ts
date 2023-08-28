@@ -159,3 +159,80 @@ function createGenusData(overrides?: MakeOptinal<GenusData>): GenusData {
 type CheckStringAgainstNumber = string extends number ? true: false;
 const checkStringAgainstNumber : CheckStringAgainstNumber = false;
 // const checkStringAgainstNumber2 : CheckStringAgainstNumber = true;
+
+// 15.2.1　ジェネリック条件型
+// *************************************************
+type CheckAgainstNumber<T> = T extends number ? true : false;
+
+// 型：false
+type CheckString = CheckAgainstNumber<'parakeet'>;
+
+// 型：true
+type CheckString2 = CheckAgainstNumber<1891>;
+
+// 型：true
+type CheckString3 = CheckAgainstNumber<number>;
+
+type CallableSetting<T> = T extends () => any ? T : () => T;
+
+//型：() => number[]
+type GetNumbersSetting = CallableSetting<()=>number[]>;
+
+//型：() => string
+type StringSetting = CallableSetting<string>;
+
+interface QueryOptions {
+  throwIfNotFound: boolean;
+}
+
+type QueryResult<Options extends QueryOptions> = Options["throwIfNotFound"] extends true ? string: string|undefined;
+
+declare function retrieve<Options extends QueryOptions>(
+  key: string,options?: Options,
+): Promise<QueryResult<Options>>;
+
+const retrieve2 = retrieve("Birute Galdikas");
+const retrieve3 = retrieve("Jane Goodall", {throwIfNotFound: Math.random() > 0.5});
+const retrieve4 = retrieve("Dian Fossey",{ throwIfNotFound: true});
+
+// 15.2.2　型の分配
+// *************************************************
+type ArrayifyUnlessString<T> = T extends string ? T : T[];
+
+type HaldArrayified = ArrayifyUnlessString<string | number>;
+
+// 15.2.3　inferによる型情報の取得
+// *************************************************
+type ArrayItems<T> = T extends (infer Item)[] ? Item : T;
+
+// 型：string
+type StringItem = ArrayItems<string>;
+
+// 型：string
+type StringArrayItem = ArrayItems<string[]>;
+
+// 型：string[]
+type String2DItem = ArrayItems<string[][]>
+
+type ArrayItemsRecursive<T> = T extends (infer Item)[] ? ArrayItemsRecursive<Item> : T;
+
+// 型：string
+type StringItem2 = ArrayItemsRecursive<string>;
+
+// 型：string
+type StringArrayItem2 = ArrayItemsRecursive<string[]>;
+
+// 型：string
+type String2DItem2 = ArrayItemsRecursive<string[][]>
+
+// 15.2.4　マップ条件
+// *************************************************
+type MakeAllMembersFunctions<T> = {
+  [K in keyof T]: T[K] extends (...args: any[]) => any ? T[K] : () => T[K]
+};
+
+type MemberFunctions = MakeAllMembersFunctions<{
+  alreadyFunction: () => string,
+  notYetFunction: number,
+}>;
+

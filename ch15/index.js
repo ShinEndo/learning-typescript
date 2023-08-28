@@ -55,4 +55,6 @@ function createGenusData(overrides) {
     return __assign({ family: "unknown", name: "unknown" }, overrides);
 }
 var checkStringAgainstNumber = false;
-// const checkStringAgainstNumber2 : CheckStringAgainstNumber = true;
+var retrieve2 = retrieve("Birute Galdikas");
+var retrieve3 = retrieve("Jane Goodall", { throwIfNotFound: Math.random() > 0.5 });
+var retrieve4 = retrieve("Dian Fossey", { throwIfNotFound: true });
