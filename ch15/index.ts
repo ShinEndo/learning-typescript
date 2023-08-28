@@ -236,3 +236,112 @@ type MemberFunctions = MakeAllMembersFunctions<{
   notYetFunction: number,
 }>;
 
+// 15.3　never
+// *************************************************
+// 15.3.1　neverと交差型と合併型
+// *************************************************
+type NeverIntersection = never & string;
+type NeverUnion = never | string;
+
+// 15.3.2　neverと条件型
+// *************************************************
+type OnlyStrings<T> = T extends string ? T : never;
+
+type ReadOrBlue = OnlyStrings<"red" | "blue" | 0 | false>;
+
+// 15.4　テンプレートリテラル型
+// *************************************************
+type Greeting = `Hello${string}`;
+
+let matches : Greeting = "Hello, world!";
+
+// let outOfOrder: Greeting = "World! Hello!";
+
+type Brightness = "dark" | "light";
+type Color = "blue" | "red";
+
+type BrightnessAndColor = `${Brightness}-${Color}`;
+
+const lightBlue: BrightnessAndColor = 'light-blue';
+// const darkGreen: BrightnessAndColor = 'dark-green';
+
+type ExtoNumber = `much ${number} wow`;
+
+function extol(extolee: ExtoNumber){};
+
+extol('much 0 wow');
+extol('much 123 wow');
+extol('much 1.23 wow');
+// extol('much 1 23 wow');
+// extol('much false wow');
+
+// 15.4.1　組み込み文字列操作型
+// *************************************************
+type FormalGreeting = Capitalize<"hello">;
+
+// 15.4.2　テンプレートキー
+// *************************************************
+type DataKey = "location" | "name" | "year";
+
+type ExistenceChecks = {
+  [K in `check${Capitalize<DataKey>}`]: () => boolean;
+}
+
+function checkExistence(checks: ExistenceChecks) {
+  checks.checkLocation();
+  checks.checkName();
+  checks.checkYear();
+  // checks.checkWrong();
+}
+
+// 15.4.3　マップ型のキーの再マッピング
+// *************************************************
+interface DataEntry<T> {
+  key: T;
+  value: string;
+}
+
+type DataKey2 = "location" | "name" | "yaer";
+
+type DataEntryGetters = {
+  [K in DataKey as `get${Capitalize<K>}`]: () => DataEntry<K>;
+};
+
+const config = {
+  location: "unknown",
+  name: "anonymous",
+  year: 0,
+};
+
+type LazyValues = {
+  [K in keyof typeof config as `${K}Lazy`]: () => Promise<typeof config[K]>;
+};
+
+async function withlazyValues(configGetter: LazyValues) {
+  await configGetter.locationLazy();
+  // await configGetter.missingLazy();
+}
+
+// type TurnIntoGettersDirect<T> = {
+//   [K in keyof T as `get${K}`]: () => T[K];
+// }
+
+const someSymbol = Symbol("");
+
+interface HasStringAndSymbol {
+  StringKey: string;
+  [someSymbol]: number;
+}
+
+type TurnIntoGetters<T> = {
+  [K in keyof T as `get${string & K}`]: () => T[K];
+}
+
+type GettersJustString = TurnIntoGetters<HasStringAndSymbol>;
+
+
+
+
+
+
+
